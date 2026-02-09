@@ -43,7 +43,7 @@
 
         /* 네비게이션 버튼 스타일 */
         .nav-link {
-            padding: 0.5rem 1.0rem;
+            padding: 0.5rem 0.8rem;
             margin: 0 0.1rem;
             font-weight: 600;
             color: #57534E;
@@ -55,8 +55,8 @@
         .nav-cta.active { background-color: #0D9488; color: white; }
 
         /* 테이블 스타일 */
-        .forest-table th { background-color: #115E59; color: #CCFBF1; font-weight: 500; border-right: 1px solid #134E4A; padding: 1rem; }
-        .forest-table td { padding: 1rem 0.75rem; vertical-align: middle; border-bottom: 1px solid #E2E8F0; }
+        .forest-table th { background-color: #115E59; color: #CCFBF1; font-weight: 500; border-right: 1px solid #134E4A; padding: 0.75rem; }
+        .forest-table td { padding: 0.75rem 0.5rem; vertical-align: middle; border-bottom: 1px solid #E2E8F0; }
         .forest-table tr:hover td { background-color: #F0FDFA; }
 
         /* 🚨 모달 스타일 개선 (스크롤 문제 해결) */
@@ -76,17 +76,11 @@
             border-top: 8px solid #0D9488;
             width: 100%; max-width: 500px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            /* 스크롤 설정 */
-            max-height: 85vh; /* 화면 높이의 85%까지만 차지 */
-            overflow-y: auto; /* 내용이 넘치면 스크롤 생성 */
-            -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
+            /* 핵심: 모바일 화면 대응 스크롤 */
+            max-height: 85vh; 
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
-
-        /* 팝업 내부 스크롤바 스타일 */
-        .modal-content::-webkit-scrollbar { width: 8px; }
-        .modal-content::-webkit-scrollbar-track { background: #f1f5f9; }
-        .modal-content::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        .modal-content::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         
         @keyframes fadeScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
@@ -104,18 +98,17 @@
     <!-- 헤더 -->
     <header class="nature-header fixed w-full top-0 z-50 h-20 flex items-center justify-between px-4">
         <div class="flex items-center gap-2 group">
-            <!-- QR코드 버튼 -->
-            <button onclick="openQrModal()" class="mr-3 p-1 bg-white border-2 border-teal-200 rounded-lg hover:border-teal-500 hover:shadow-md transition flex flex-col items-center" title="QR코드 크게 보기">
+            <!-- QR코드 버튼 (모바일용) -->
+            <button onclick="openQrModal()" class="mr-3 p-1 bg-white border-2 border-teal-200 rounded-lg hover:border-teal-500 hover:shadow-md transition flex flex-col items-center md:hidden" title="QR코드">
                 <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://dodam20190325.github.io/senior3&color=115E59" alt="QR" class="w-8 h-8">
-                <span class="text-[0.6rem] font-bold text-teal-700 leading-none mt-0.5">Mobile</span>
             </button>
             <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0); resetNav();">
                 <span class="text-3xl transform group-hover:rotate-12 transition-transform duration-300">🍃</span>
-                <h1 class="text-xl md:text-2xl font-black text-teal-900 tracking-tight">시니어 스마트 생활 교실</h1>
+                <h1 class="text-lg md:text-2xl font-black text-teal-900 tracking-tight">시니어 스마트 생활 교실</h1>
             </div>
         </div>
         
-        <nav class="hidden md:flex items-center" id="main-nav">
+        <nav class="hidden lg:flex items-center" id="main-nav">
             <a href="#home" class="nav-link">홈</a>
             <a href="#about" class="nav-link">교육 소개</a>
             <a href="#gallery" class="nav-link">작품 갤러리</a>
@@ -125,7 +118,7 @@
             <a href="#apply" class="nav-link nav-cta">수강 신청</a>
         </nav>
         
-        <button id="mobile-menu-btn" class="md:hidden text-teal-800 p-2 focus:outline-none">
+        <button id="mobile-menu-btn" class="lg:hidden text-teal-800 p-2 focus:outline-none">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
             </svg>
@@ -133,7 +126,7 @@
     </header>
 
     <!-- 모바일 메뉴 -->
-    <div id="mobile-menu" class="hidden fixed top-20 left-0 w-full bg-[#F0FDFA]/98 backdrop-blur-md z-40 border-b border-teal-200 shadow-xl md:hidden transition-all duration-300">
+    <div id="mobile-menu" class="hidden fixed top-20 left-0 w-full bg-[#F0FDFA]/98 backdrop-blur-md z-40 border-b border-teal-200 shadow-xl lg:hidden transition-all duration-300">
         <nav class="flex flex-col p-6 space-y-4 text-center">
             <a href="#home" class="text-lg font-bold text-teal-800 hover:text-teal-600 py-2 border-b border-teal-100">홈</a>
             <a href="#about" class="text-lg font-bold text-teal-800 hover:text-teal-600 py-2 border-b border-teal-100">교육 소개</a>
@@ -189,19 +182,16 @@
                     <div class="w-16 h-16 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📱</div>
                     <h4 class="text-2xl font-bold mb-3 text-slate-800">디지털 기초 & AI 비서</h4>
                     <p class="text-slate-600 leading-relaxed mb-4 text-sm">와이파이, 카카오톡 설정부터<br>AI(제미나이)와 대화하며<br>궁금증을 해결하는 법을 배웁니다.</p>
-                    <div class="w-12 h-1 bg-teal-200 rounded-full group-hover:w-20 transition-all"></div>
                 </div>
                 <div class="clean-card p-8 organic-shape-reverse hover:bg-teal-50/50 group">
                     <div class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🎨</div>
                     <h4 class="text-2xl font-bold mb-3 text-slate-800">AI 아트 & 나만의 굿즈</h4>
                     <p class="text-slate-600 leading-relaxed mb-4 text-sm">말로 설명하면 그려주는 AI 화가!<br>내 그림으로 세상에 하나뿐인<br>컵과 에코백을 만듭니다.</p>
-                    <div class="w-12 h-1 bg-green-200 rounded-full group-hover:w-20 transition-all"></div>
                 </div>
                 <div class="clean-card p-8 organic-shape-reverse hover:bg-teal-50/50 group">
                     <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🎬</div>
                     <h4 class="text-2xl font-bold mb-3 text-slate-800">영상 자서전 & 유튜버</h4>
                     <p class="text-slate-600 leading-relaxed mb-4 text-sm">AI 영상 편집 도구 'Vrew'로<br>추억을 영상으로 만들고<br>유튜브에 올려봅니다.</p>
-                    <div class="w-12 h-1 bg-yellow-200 rounded-full group-hover:w-20 transition-all"></div>
                 </div>
             </div>
         </section>
@@ -328,9 +318,9 @@
             </div>
         </section>
 
-        <!-- 상세 교육 계획서 섹션 -->
+        <!-- 상세 교육 계획서 섹션 (복구 완료) -->
         <section id="plan" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
-            <!-- 1. 거제3동 & 유라시아 (5주) -->
+            <!-- 5주 과정 -->
             <div class="clean-card overflow-hidden organic-shape border-none mb-12">
                 <div class="p-8 bg-teal-700 text-white flex justify-between items-center flex-wrap gap-4">
                     <div><h3 class="text-2xl font-bold">거제3동 행복복지센터 & 부산유라시아플랫폼</h3><p class="text-teal-100 mt-1">상세 교육 계획서 (5주 / 15차시 / 주 3회)</p></div>
@@ -365,6 +355,7 @@
                     </table>
                 </div>
             </div>
+
             <!-- 2. 북구청 & 부산도서관 (4주) -->
             <div class="clean-card overflow-hidden organic-shape border-none">
                 <div class="p-8 bg-emerald-700 text-white flex justify-between items-center flex-wrap gap-4">
@@ -399,7 +390,7 @@
             </div>
         </section>
 
-        <!-- 수강 신청 섹션 (복구됨) -->
+        <!-- 수강 신청 섹션 (복구 완료) -->
         <section id="apply" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
             <div class="text-center mb-16">
                 <span class="inline-block py-2 px-6 rounded-full bg-teal-600 text-white text-sm font-bold mb-6 shadow-lg shadow-teal-500/30">수강 신청</span>
@@ -546,17 +537,14 @@
             document.getElementById('applicationModal').classList.add('modal-active'); 
             document.body.style.overflow = 'hidden'; 
             
-            // 거주지 선택 초기화
             const resContainer = document.getElementById('residenceContainer'); 
             const labelLocal = document.getElementById('labelLocal'); 
             const resNote = document.getElementById('residenceNote'); 
             document.querySelectorAll('input[name="residence"]').forEach(el => el.checked = false); 
             
-            // 거주지 확인 로직 (연제구/북구만 표시)
             if (centerName.includes('연제') || centerName.includes('거제3동')) { 
                 resContainer.classList.remove('hidden'); 
                 labelLocal.textContent = "연제구 거주"; 
-                // data-label 속성 설정
                 document.querySelector('input[value="local"]').setAttribute('data-label', '연제구'); 
                 resNote.textContent = "* 연제구민 우선 선발"; 
             } else if (centerName.includes('북구')) { 
@@ -605,6 +593,7 @@
             btn.innerHTML = '<span class="animate-pulse">전송 중... 잠시만 기다려주세요</span>'; 
             btn.disabled = true;
             
+            // 전송 데이터 구성 (Code.gs와 일치)
             const formData = { 
                 center: centerName, 
                 name: userName, 
