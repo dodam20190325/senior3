@@ -68,36 +68,26 @@
         .forest-table td { padding: 1rem 0.75rem; vertical-align: middle; border-bottom: 1px solid #E2E8F0; }
         .forest-table tr:hover td { background-color: #F0FDFA; }
 
-        /* 모달 스타일 (스크롤 개선) */
+        /* 모달 스타일 (스크롤 기능 추가) */
         .modal-overlay {
             display: none;
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(19, 78, 74, 0.6);
             backdrop-filter: blur(5px);
             z-index: 10000;
-            justify-content: center; align-items: center;
-            padding: 1rem; /* 모바일 여백 */
+            justify-content: center; align-items: center; padding: 1rem;
         }
         .modal-active { display: flex !important; animation: fadeScale 0.3s ease-out; }
-        
         .modal-content {
             background: #FFFFFF; 
             border-radius: 1.5rem;
             border-top: 8px solid #0D9488;
             width: 100%; max-width: 500px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            /* 스크롤 핵심 설정 */
-            max-height: 85vh; /* 화면 높이의 85%까지만 차지 */
+            max-height: 85vh; /* 화면 높이의 85%까지만 */
             overflow-y: auto; /* 내용이 넘치면 스크롤 생성 */
-            -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
-            display: flex;
-            flex-direction: column;
         }
         
-        /* 모달 헤더 고정, 바디만 스크롤 */
-        .modal-header { flex-shrink: 0; }
-        .modal-body { overflow-y: auto; }
-
         @keyframes fadeScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
         section { scroll-margin-top: 100px; }
@@ -190,7 +180,7 @@
             </div>
         </section>
 
-        <!-- 교육 소개 -->
+        <!-- 교육 소개 (날짜 삭제됨) -->
         <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
             <div class="text-center mb-16">
                 <h3 class="text-3xl md:text-4xl font-black text-teal-900 mb-3">무엇을 배우나요?</h3>
@@ -247,7 +237,7 @@
             </div>
         </section>
 
-        <!-- 오시는 길 -->
+        <!-- 오시는 길 (명칭 수정됨) -->
         <section id="directions" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
             <div class="text-center mb-16">
                 <h3 class="text-3xl md:text-4xl font-black text-teal-900 mb-4">가까운 교육장 찾기</h3>
@@ -264,7 +254,7 @@
                     </div>
                     <button onclick="openModal('거제3동 행복복지센터 2층 정보화교육장')" class="ml-auto px-4 py-2 bg-slate-800 text-white text-sm font-bold rounded-lg hover:bg-teal-600 transition shadow-lg self-center">신청하기</button>
                 </div>
-                <!-- 2. 유라시아 -->
+                <!-- 2. 부산유라시아플랫폼 -->
                 <div class="clean-card p-6 flex items-start gap-6 organic-shape group hover:border-teal-400">
                     <div class="w-16 h-16 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-3xl shrink-0 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">🚆</div>
                     <div>
@@ -340,9 +330,9 @@
             </div>
         </section>
 
-        <!-- 상세 교육 계획서 섹션 -->
+        <!-- 교육계획서 (복구됨) -->
         <section id="plan" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
-            <!-- 1. 거제3동 & 유라시아 (5주) -->
+            <!-- 1. 거제3동 & 유라시아 -->
             <div class="clean-card overflow-hidden organic-shape border-none mb-12">
                 <div class="p-8 bg-teal-700 text-white flex justify-between items-center flex-wrap gap-4">
                     <div><h3 class="text-2xl font-bold">거제3동 행복복지센터 & 부산유라시아플랫폼</h3><p class="text-teal-100 mt-1">상세 교육 계획서 (5주 / 15차시 / 주 3회)</p></div>
@@ -385,19 +375,15 @@
                             <tr class="text-white"><th class="p-4 bg-emerald-800 w-20 text-center">주차</th><th class="p-4 bg-emerald-800 w-20 text-center">일차</th><th class="p-4 bg-emerald-800 w-32">구분</th><th class="p-4 bg-emerald-800 w-48">차시명</th><th class="p-4 bg-emerald-900">주요 학습 내용</th><th class="p-4 bg-emerald-900 w-32 text-center">결과물</th></tr>
                         </thead>
                         <tbody class="text-sm font-medium text-slate-700 bg-white">
-                            <!-- 1주차 -->
                             <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-emerald-700 bg-emerald-50/30">1주차</td><td class="p-4 border-r text-center">1일차</td><td rowspan="2" class="p-4 border-r text-slate-500">기초 다지기</td><td class="p-4 border-r font-bold">컴퓨터와 친해지기</td><td class="p-4">컴퓨터 구성 이해, 문자 입력, 기본 프로그램 활용, 파일 관리</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
                             <tr><td class="p-4 border-r text-center">2일차</td><td class="p-4 border-r font-bold">인터넷 활용 기초</td><td class="p-4">구글 계정 만들기, 검색, 안전한 인터넷 사용, 도안 제작</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
                             <tr><td class="p-4 border-r text-center">3일차</td><td class="p-4 border-r text-slate-500">창작 실습</td><td class="p-4 border-r font-bold text-emerald-600">굿즈만들기 1</td><td class="p-4">도안 제작 및 전사 작품(머그컵) 만들기</td><td class="p-4 border-l text-center font-bold text-emerald-600 bg-emerald-50">☕ 전사컵</td></tr>
-                            <!-- 2주차 -->
                             <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-emerald-700 bg-emerald-50/30">2주차</td><td class="p-4 border-r text-center">4일차</td><td class="p-4 border-r text-slate-500">생활 활용</td><td class="p-4 border-r font-bold">생활 속 디지털 활용</td><td class="p-4">① 등기부등본 ② 정부24 민원 조회 및 발급</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
                             <tr><td class="p-4 border-r text-center">5일차</td><td class="p-4 border-r text-slate-500">콘텐츠 제작</td><td class="p-4 border-r font-bold">이미지, 영상, 음악만들기</td><td class="p-4">예쁜 그림 검색(AI 체험), 오디오로 음악앨범, 짧은 영상 제작</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
                             <tr><td class="p-4 border-r text-center">6일차</td><td class="p-4 border-r text-slate-500">창작 실습</td><td class="p-4 border-r font-bold text-emerald-600">굿즈만들기 2</td><td class="p-4">도안 제작 및 전사 작품(에코백) 만들기</td><td class="p-4 border-l text-center font-bold text-emerald-600 bg-emerald-50">👜 에코백</td></tr>
-                            <!-- 3주차 -->
                             <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-emerald-700 bg-emerald-50/30">3주차</td><td class="p-4 border-r text-center">7일차</td><td rowspan="2" class="p-4 border-r text-slate-500">AI 크리에이터</td><td class="p-4 border-r font-bold">유튜브 이해</td><td class="p-4">유튜브 구조 이해, 계정 및 채널 만들기</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
                             <tr><td class="p-4 border-r text-center">8일차</td><td class="p-4 border-r font-bold">영상 업로드 / 안전</td><td class="p-4">영상 업로드, 제목/설명 작성, 저작권 및 개인정보 보호, 주의사항</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
                             <tr><td class="p-4 border-r text-center">9일차</td><td class="p-4 border-r text-slate-500">창작 실습</td><td class="p-4 border-r font-bold text-emerald-600">굿즈만들기 3</td><td class="p-4">도안 제작 및 전사 작품(석화타일) 만들기</td><td class="p-4 border-l text-center font-bold text-emerald-600 bg-emerald-50">🖼️ 석화타일</td></tr>
-                            <!-- 4주차 -->
                             <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-emerald-700 bg-emerald-50/30">4주차</td><td class="p-4 border-r text-center">10일차</td><td rowspan="2" class="p-4 border-r text-slate-500">온라인 소통</td><td class="p-4 border-r font-bold">나만의 패들렛 만들기</td><td class="p-4">패들렛 접속 및 화면 구성 이해, 온라인 게시판 만들기</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
                             <tr><td class="p-4 border-r text-center">11일차</td><td class="p-4 border-r font-bold">패들렛에 작품 올리기</td><td class="p-4">이미지·영상 작품 업로드, 글 작성 및 댓글 소통</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
                             <tr><td class="p-4 border-r text-center">12일차</td><td class="p-4 border-r text-slate-500">창작 실습</td><td class="p-4 border-r font-bold text-emerald-600">굿즈만들기 4</td><td class="p-4">전사 작품(가죽 열쇠고리) 만들기, 결과물 공유 및 수료</td><td class="p-4 border-l text-center font-bold text-emerald-600 bg-emerald-50">🔑 열쇠고리</td></tr>
