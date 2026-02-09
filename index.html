@@ -68,25 +68,36 @@
         .forest-table td { padding: 1rem 0.75rem; vertical-align: middle; border-bottom: 1px solid #E2E8F0; }
         .forest-table tr:hover td { background-color: #F0FDFA; }
 
-        /* 모달 스타일 */
+        /* 모달 스타일 (스크롤 개선) */
         .modal-overlay {
             display: none;
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-color: rgba(19, 78, 74, 0.6);
             backdrop-filter: blur(5px);
             z-index: 10000;
-            justify-content: center; align-items: center; padding: 1rem;
+            justify-content: center; align-items: center;
+            padding: 1rem; /* 모바일 여백 */
         }
         .modal-active { display: flex !important; animation: fadeScale 0.3s ease-out; }
+        
         .modal-content {
             background: #FFFFFF; 
             border-radius: 1.5rem;
             border-top: 8px solid #0D9488;
             width: 100%; max-width: 500px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            max-height: 90vh; overflow-y: auto;
+            /* 스크롤 핵심 설정 */
+            max-height: 85vh; /* 화면 높이의 85%까지만 차지 */
+            overflow-y: auto; /* 내용이 넘치면 스크롤 생성 */
+            -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
+            display: flex;
+            flex-direction: column;
         }
         
+        /* 모달 헤더 고정, 바디만 스크롤 */
+        .modal-header { flex-shrink: 0; }
+        .modal-body { overflow-y: auto; }
+
         @keyframes fadeScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
         section { scroll-margin-top: 100px; }
@@ -179,7 +190,7 @@
             </div>
         </section>
 
-        <!-- 교육 소개 (수정됨: 날짜 문구 삭제) -->
+        <!-- 교육 소개 -->
         <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
             <div class="text-center mb-16">
                 <h3 class="text-3xl md:text-4xl font-black text-teal-900 mb-3">무엇을 배우나요?</h3>
@@ -236,7 +247,7 @@
             </div>
         </section>
 
-        <!-- 오시는 길 (수정됨: 교육장 명칭 반영) -->
+        <!-- 오시는 길 -->
         <section id="directions" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
             <div class="text-center mb-16">
                 <h3 class="text-3xl md:text-4xl font-black text-teal-900 mb-4">가까운 교육장 찾기</h3>
