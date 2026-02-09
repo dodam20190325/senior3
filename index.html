@@ -505,7 +505,7 @@
         function autoHyphen(target) { target.value = target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, ""); }
         
         // ✅ [중요] 구글 앱스 스크립트 웹 앱 URL (사용자 제공)
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx7THzuK4KcY86FkU_2aw8JW9Om6PzbGnFlV4upxAcBYvFnFTThy-aFlFLdCd0ci8M_8g/exec"; 
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzsHdHfVcn_wzBwssnPcptcVgPCaKZQUkAdX0WW8V-a4LdF1i3zYtv8Uv8FOmt2CjE9/exec"; 
         
         const isDemoMode = false;
         const navLinks = document.querySelectorAll('.nav-link'); const sections = document.querySelectorAll('section');
@@ -537,36 +537,36 @@
             if (centerName.includes('거제3동')) {
                 // 거제3동 (월수금 09:30)
                 terms = [
-                    {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28)'},
-                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07)'},
-                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21)'},
-                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04)'},
-                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11)'}
+                    {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28) 월수금'},
+                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07) 화수금'},
+                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21) 월수금'},
+                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04) 월수금'},
+                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11) 월수금'}
                 ];
             } else if (centerName.includes('유라시아')) {
                 // 유라시아 (월수금 14:00)
                 terms = [
-                    {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28)'},
-                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07)'},
-                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21)'},
-                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04)'},
-                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11)'}
+                    {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28) 월수금'},
+                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07) 화수금'},
+                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21) 월수금'},
+                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04) 월수금'},
+                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11) 월수금'}
                 ];
             } else if (centerName.includes('북구청')) {
                 // 북구청 (월수금 10:00) - 전체 AI
                 terms = [
-                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14)'},
-                    {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28)'},
-                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18)'},
-                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25)'}
+                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14) 월수금'},
+                    {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28) 월수금'},
+                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18) 월수금'},
+                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25) 월수금'}
                 ];
             } else if (centerName.includes('부산도서관')) {
                 // 부산도서관 (월수금 14:00) - 전체 AI
                 terms = [
-                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14)'},
-                    {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28)'},
-                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18)'},
-                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25)'}
+                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14) 월수금'},
+                    {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28) 월수금'},
+                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18) 월수금'},
+                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25) 월수금'}
                 ];
             }
 
@@ -666,3 +666,4 @@
     </script>
 </body>
 </html>
+
