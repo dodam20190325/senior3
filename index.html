@@ -76,11 +76,17 @@
             border-top: 8px solid #0D9488;
             width: 100%; max-width: 500px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            /* 핵심: 모바일 화면 대응 스크롤 */
-            max-height: 85vh; 
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+            /* 스크롤 설정 */
+            max-height: 85vh; /* 화면 높이의 85%까지만 차지 */
+            overflow-y: auto; /* 내용이 넘치면 스크롤 생성 */
+            -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
         }
+
+        /* 팝업 내부 스크롤바 스타일 */
+        .modal-content::-webkit-scrollbar { width: 8px; }
+        .modal-content::-webkit-scrollbar-track { background: #f1f5f9; }
+        .modal-content::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .modal-content::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         
         @keyframes fadeScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
@@ -487,7 +493,7 @@
     <!-- 신청 양식 팝업 (모달) -->
     <div id="applicationModal" class="modal-overlay">
         <div class="modal-content relative overflow-hidden">
-            <div class="bg-teal-700 p-8 flex justify-between items-center">
+            <div class="bg-teal-700 p-8 flex justify-between items-center sticky top-0 z-10">
                 <div><h3 class="text-2xl font-bold text-white">수강 신청하기</h3><p class="text-teal-100 text-sm mt-1">간편하게 신청하고 문자로 안내받으세요.</p></div>
                 <button onclick="closeModal()" class="text-teal-200 hover:text-white transition p-2 bg-teal-800 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
             </div>
@@ -496,9 +502,13 @@
                     <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">신청 교육장</label><input type="text" id="selectedCenter" name="center" class="w-full p-4 bg-teal-50 rounded-2xl text-slate-800 font-bold border-none text-lg" readonly></div>
                     <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">성함</label><input type="text" id="userName" name="name" required placeholder="예: 홍길동" class="w-full p-4 border-2 border-teal-100 rounded-2xl focus:outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-100 transition text-lg placeholder:text-slate-300"></div>
                     <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">연락처</label><input type="tel" id="userPhone" name="phone" required placeholder="예: 01012345678" maxlength="13" oninput="autoHyphen(this)" class="w-full p-4 border-2 border-teal-100 rounded-2xl focus:outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-100 transition text-lg placeholder:text-slate-300"><p class="text-xs text-slate-400 mt-1">* 숫자만 입력하시면 자동으로 하이픈(-)이 입력됩니다.</p></div>
+                    
                     <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">성별</label><div class="grid grid-cols-2 gap-3"><label class="cursor-pointer"><input type="radio" name="gender" value="남" class="peer sr-only" required><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition">남성</div></label><label class="cursor-pointer"><input type="radio" name="gender" value="여" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition">여성</div></label></div></div>
+                    
                     <div class="mb-8"><label class="block text-sm font-bold text-slate-700 mb-2">연령대</label><div class="grid grid-cols-3 gap-3"><label class="cursor-pointer"><input type="radio" name="ageGroup" value="50대" class="peer sr-only" required><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition">50대</div></label><label class="cursor-pointer"><input type="radio" name="ageGroup" value="60대" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition">60대</div></label><label class="cursor-pointer"><input type="radio" name="ageGroup" value="70대 이상" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition">70대 이상</div></label></div><p class="text-xs text-slate-400 mt-2">* 해당되는 연령대를 선택해주세요.</p></div>
+                    
                     <div id="residenceContainer" class="mb-8 hidden"><label class="block text-sm font-bold text-slate-700 mb-2">거주지 확인 <span class="text-xs font-normal text-teal-600 ml-2" id="residenceNote"></span></label><div class="grid grid-cols-2 gap-3"><label class="cursor-pointer"><input type="radio" name="residence" value="local" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition" id="labelLocal">해당 구 거주</div></label><label class="cursor-pointer"><input type="radio" name="residence" value="other" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition">그 외 지역</div></label></div></div>
+                    
                     <button type="submit" id="submitBtn" class="w-full py-5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-2xl transition shadow-xl shadow-teal-500/30 flex justify-center items-center gap-2 text-xl transform active:scale-95"><span>제출하기</span><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg></button>
                 </form>
             </div>
@@ -517,7 +527,10 @@
 
     <script>
         function autoHyphen(target) { target.value = target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, ""); }
+        
+        // ✅ [중요] 구글 앱스 스크립트 웹 앱 URL (사용자 제공)
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx7THzuK4KcY86FkU_2aw8JW9Om6PzbGnFlV4upxAcBYvFnFTThy-aFlFLdCd0ci8M_8g/exec"; 
+        
         const isDemoMode = false;
         const navLinks = document.querySelectorAll('.nav-link'); const sections = document.querySelectorAll('section');
         navLinks.forEach(link => { link.addEventListener('click', function() { navLinks.forEach(l => l.classList.remove('active')); this.classList.add('active'); }); });
@@ -533,14 +546,13 @@
             document.getElementById('applicationModal').classList.add('modal-active'); 
             document.body.style.overflow = 'hidden'; 
             
-            // 거주지 확인 로직
+            // 거주지 선택 초기화
             const resContainer = document.getElementById('residenceContainer'); 
             const labelLocal = document.getElementById('labelLocal'); 
             const resNote = document.getElementById('residenceNote'); 
-            
-            // 초기화
             document.querySelectorAll('input[name="residence"]').forEach(el => el.checked = false); 
             
+            // 거주지 확인 로직 (연제구/북구만 표시)
             if (centerName.includes('연제') || centerName.includes('거제3동')) { 
                 resContainer.classList.remove('hidden'); 
                 labelLocal.textContent = "연제구 거주"; 
@@ -556,12 +568,8 @@
                 resContainer.classList.add('hidden'); 
             } 
         }
-
-        function closeModal() { 
-            document.getElementById('applicationModal').classList.remove('modal-active'); 
-            document.body.style.overflow = 'auto'; 
-        }
         
+        function closeModal() { document.getElementById('applicationModal').classList.remove('modal-active'); document.body.style.overflow = 'auto'; }
         function openQrModal() { document.getElementById('qrModal').classList.add('modal-active'); document.body.style.overflow = 'hidden'; }
         function closeQrModal() { document.getElementById('qrModal').classList.remove('modal-active'); document.body.style.overflow = 'auto'; }
         
@@ -572,7 +580,6 @@
             const centerName = document.getElementById('selectedCenter').value; 
             const userName = document.getElementById('userName').value;
             
-            // 유효성 검사
             const ageGroupNode = document.querySelector('input[name="ageGroup"]:checked'); 
             if (!ageGroupNode) { alert("연령대를 선택해주세요."); return; } 
             const ageGroupValue = ageGroupNode.value;
@@ -589,7 +596,6 @@
                 if (!resNode) { alert("거주지를 선택해주세요."); return; } 
                 
                 if (resNode.value === 'local') { 
-                    // data-label 속성에서 지역명 가져오기
                     residenceValue = resNode.getAttribute('data-label') + " 거주"; 
                 } else { 
                     residenceValue = "그 외 지역"; 
@@ -599,14 +605,13 @@
             btn.innerHTML = '<span class="animate-pulse">전송 중... 잠시만 기다려주세요</span>'; 
             btn.disabled = true;
             
-            // 전송 데이터 구성 (Code.gs와 일치해야 함)
             const formData = { 
                 center: centerName, 
                 name: userName, 
                 phone: document.getElementById('userPhone').value, 
-                ageGroup: ageGroupValue, // 서버에서 받는 이름: ageGroup
-                gender: genderValue,     // 서버에서 받는 이름: gender
-                residence: residenceValue // 서버에서 받는 이름: residence
+                ageGroup: ageGroupValue, 
+                gender: genderValue, 
+                residence: residenceValue 
             };
             
             if (isDemoMode || SCRIPT_URL === "" || SCRIPT_URL.includes("your-script-url")) { 
