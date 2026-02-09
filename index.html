@@ -59,15 +59,17 @@
         .forest-table td { padding: 1rem 0.75rem; vertical-align: middle; border-bottom: 1px solid #E2E8F0; }
         .forest-table tr:hover td { background-color: #F0FDFA; }
 
-        /* 🚨 모달 스타일 개선 (스크롤 문제 해결 핵심) */
+        /* 🚨 모달 스타일 개선 (스크롤 및 모바일 대응) */
         .modal-overlay {
             display: none;
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); /* 배경 어둡게 */
-            backdrop-filter: blur(3px);
+            background-color: rgba(19, 78, 74, 0.8);
+            backdrop-filter: blur(4px);
             z-index: 10000;
-            justify-content: center; align-items: center; 
-            padding: 1rem;
+            justify-content: center; 
+            align-items: flex-start; /* 상단 정렬 */
+            padding: 20px;
+            overflow-y: auto; /* 전체 스크롤 */
         }
         .modal-active { display: flex !important; animation: fadeScale 0.3s ease-out; }
         
@@ -77,20 +79,12 @@
             border-top: 8px solid #0D9488;
             width: 100%; max-width: 500px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            
-            /* 핵심: 화면 높이에 맞춰 스크롤 생성 */
-            max-height: 85vh; /* 화면 높이의 85%까지만 차지 */
-            overflow-y: auto; /* 내용이 넘치면 스크롤바 생성 */
-            -webkit-overflow-scrolling: touch; /* 모바일 부드러운 스크롤 */
-            display: flex;
-            flex-direction: column;
+            /* 모바일 화면 대응 */
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
         }
         
-        /* 모달 내부 스크롤바 디자인 */
-        .modal-content::-webkit-scrollbar { width: 6px; }
-        .modal-content::-webkit-scrollbar-track { background: #f1f5f9; }
-        .modal-content::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
-
         @keyframes fadeScale { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
         section { scroll-margin-top: 100px; }
@@ -99,6 +93,13 @@
             background: linear-gradient(to right, #0F766E, #059669);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+        
+        /* 체크박스 커스텀 */
+        .custom-checkbox:checked + div {
+            border-color: #0D9488;
+            background-color: #F0FDFA;
+            color: #0F766E;
         }
     </style>
 </head>
@@ -113,21 +114,29 @@
             </div>
         </div>
         
-        <nav class="hidden lg:flex items-center" id="main-nav">
-            <a href="#home" class="nav-link">홈</a>
-            <a href="#about" class="nav-link">교육 소개</a>
-            <a href="#gallery" class="nav-link">작품 갤러리</a>
-            <a href="#directions" class="nav-link">오시는 길</a>
-            <a href="#schedule" class="nav-link">일정표</a>
-            <a href="#plan" class="nav-link">교육계획서</a>
-            <a href="#apply" class="nav-link nav-cta">수강 신청</a>
-        </nav>
-        
-        <button id="mobile-menu-btn" class="lg:hidden text-teal-800 p-2 focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
-        </button>
+        <div class="flex items-center gap-3">
+            <nav class="hidden lg:flex items-center" id="main-nav">
+                <a href="#home" class="nav-link">홈</a>
+                <a href="#about" class="nav-link">교육 소개</a>
+                <a href="#gallery" class="nav-link">작품 갤러리</a>
+                <a href="#directions" class="nav-link">오시는 길</a>
+                <a href="#schedule" class="nav-link">일정표</a>
+                <a href="#plan" class="nav-link">교육계획서</a>
+                <a href="#apply" class="nav-link nav-cta">수강 신청</a>
+            </nav>
+
+            <!-- QR코드 버튼 -->
+            <button onclick="openQrModal()" class="p-1 bg-white border-2 border-teal-200 rounded-lg hover:border-teal-500 hover:shadow-md transition flex flex-col items-center" title="QR코드 크게 보기">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=100x100&data=https://dodam20190325.github.io/senior3&color=115E59" alt="QR" class="w-8 h-8">
+                <span class="text-[0.6rem] font-bold text-teal-700 leading-none mt-0.5">Mobile</span>
+            </button>
+            
+            <button id="mobile-menu-btn" class="lg:hidden text-teal-800 p-2 focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
     </header>
 
     <!-- 모바일 메뉴 -->
@@ -144,36 +153,33 @@
     </div>
 
     <main class="pt-28 pb-16">
-        <!-- 홈 (수정됨: QR코드 오른쪽 배치) -->
+        <!-- 홈 -->
         <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24" id="home">
             <div class="bg-white rounded-[3rem] p-8 md:p-16 shadow-xl relative overflow-hidden flex flex-col-reverse md:flex-row items-center gap-12 border border-teal-50">
                 <div class="absolute top-0 left-0 w-full h-4 bg-gradient-to-r from-teal-400 to-emerald-500"></div>
-                
-                <!-- 텍스트 콘텐츠 (왼쪽) -->
                 <div class="relative z-10 w-full md:w-3/5 text-center md:text-left">
-                    <span class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-teal-50 border border-teal-100 text-teal-700 text-sm font-bold mb-6 mx-auto md:mx-0">
+                    <span class="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-teal-50 border border-teal-100 text-teal-700 text-sm font-bold mb-8">
                         <span class="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></span>
                         2026 부산시 지원사업
                     </span>
-                    <h2 class="text-4xl md:text-6xl font-black mb-6 leading-tight text-slate-800">
+                    <h2 class="text-4xl md:text-6xl font-black mb-8 leading-tight text-slate-800">
                         <span class="text-gradient-forest">인공지능(AI)</span>과 함께하는<br>
                         품격 있는 스마트 라이프
                     </h2>
-                    <p class="text-lg md:text-xl text-slate-500 mb-10 leading-relaxed">
+                    <p class="text-lg md:text-xl text-slate-500 mb-12 leading-relaxed">
                         복잡한 세상, AI가 당신의 든든한 길잡이가 됩니다.<br>
                         기초부터 활용까지 쉽고 재미있게 시작해보세요.
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="#apply" class="px-8 py-4 bg-teal-600 text-white text-lg font-bold organic-shape hover:bg-teal-700 transition shadow-lg shadow-teal-500/30 flex items-center justify-center gap-2">
+                        <a href="#apply" class="px-10 py-4 bg-teal-600 text-white text-lg font-bold organic-shape hover:bg-teal-700 transition shadow-lg shadow-teal-500/30 flex items-center justify-center gap-2">
                             지금 신청하기 <span class="text-xl">👉</span>
                         </a>
-                        <a href="#schedule" class="px-8 py-4 bg-white text-teal-700 text-lg font-bold organic-shape border-2 border-teal-100 hover:border-teal-300 hover:bg-teal-50 transition flex items-center justify-center gap-2">
-                            일정 확인하기 📅
+                        <a href="#schedule" class="px-10 py-4 bg-white text-teal-700 text-lg font-bold organic-shape border-2 border-teal-100 hover:border-teal-300 hover:bg-teal-50 transition flex items-center justify-center gap-2">
+                            일정 확인하기 <span class="text-xl">📅</span>
                         </a>
                     </div>
                 </div>
 
-                <!-- QR코드 카드 (오른쪽, 요청하신 디자인) -->
                 <div class="relative z-10 w-full md:w-2/5 flex justify-center">
                     <div class="bg-teal-50 p-8 rounded-[2.5rem] border border-teal-100 shadow-xl text-center transform hover:scale-105 transition duration-300 w-full max-w-sm">
                         <div class="bg-white rounded-3xl p-4 shadow-sm mb-6 inline-block">
@@ -186,30 +192,34 @@
             </div>
         </section>
 
-        <!-- 교육 소개 (날짜 삭제됨) -->
+        <!-- 교육 소개 -->
         <section id="about" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
             <div class="text-center mb-16">
                 <h3 class="text-3xl md:text-4xl font-black text-teal-900 mb-3">무엇을 배우나요?</h3>
-                <p class="text-lg text-slate-500">AI와 함께하는 쉽고 재미있는 3가지 핵심 과정</p>
+                <p class="text-lg text-slate-500">PC 기초부터 최신 AI 활용까지! (교육장별 과정 상이)</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- PC 기초 과정 -->
                 <div class="clean-card p-8 organic-shape-reverse hover:bg-teal-50/50 group">
-                    <div class="w-16 h-16 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">📱</div>
-                    <h4 class="text-2xl font-bold mb-3 text-slate-800">디지털 기초 & AI 비서</h4>
-                    <p class="text-slate-600 leading-relaxed mb-4 text-sm">와이파이, 카카오톡 설정부터<br>AI(제미나이)와 대화하며<br>궁금증을 해결하는 법을 배웁니다.</p>
+                    <div class="w-16 h-16 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">💻</div>
+                    <h4 class="text-2xl font-bold mb-3 text-slate-800">PC 기초 및 디지털 생활 (3일 과정)</h4>
+                    <ul class="text-slate-600 leading-relaxed mb-4 text-sm space-y-2 text-left">
+                        <li><strong>1일차:</strong> 컴퓨터와 친해지기 (전원, 마우스, 자판 익히기)</li>
+                        <li><strong>2일차:</strong> 나만의 문서 만들기 (타자 연습, 간단한 글쓰기)</li>
+                        <li><strong>3일차:</strong> 구글 계정, 정보 검색, 정부24 민원 조회/발급</li>
+                    </ul>
                     <div class="w-12 h-1 bg-teal-200 rounded-full group-hover:w-20 transition-all"></div>
                 </div>
+                <!-- AI 활용 과정 -->
                 <div class="clean-card p-8 organic-shape-reverse hover:bg-teal-50/50 group">
-                    <div class="w-16 h-16 bg-green-100 text-green-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🎨</div>
-                    <h4 class="text-2xl font-bold mb-3 text-slate-800">AI 아트 & 나만의 굿즈</h4>
-                    <p class="text-slate-600 leading-relaxed mb-4 text-sm">말로 설명하면 그려주는 AI 화가!<br>내 그림으로 세상에 하나뿐인<br>컵과 에코백을 만듭니다.</p>
-                    <div class="w-12 h-1 bg-green-200 rounded-full group-hover:w-20 transition-all"></div>
-                </div>
-                <div class="clean-card p-8 organic-shape-reverse hover:bg-teal-50/50 group">
-                    <div class="w-16 h-16 bg-yellow-100 text-yellow-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🎬</div>
-                    <h4 class="text-2xl font-bold mb-3 text-slate-800">영상 자서전 & 유튜버</h4>
-                    <p class="text-slate-600 leading-relaxed mb-4 text-sm">AI 영상 편집 도구 'Vrew'로<br>추억을 영상으로 만들고<br>유튜브에 올려봅니다.</p>
-                    <div class="w-12 h-1 bg-yellow-200 rounded-full group-hover:w-20 transition-all"></div>
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">🤖</div>
+                    <h4 class="text-2xl font-bold mb-3 text-slate-800">AI 활용 및 크리에이터 (3일 과정)</h4>
+                    <ul class="text-slate-600 leading-relaxed mb-4 text-sm space-y-2 text-left">
+                        <li><strong>1일차:</strong> AI 이미지 생성 & 영상 변환 (상상을 현실로)</li>
+                        <li><strong>2일차:</strong> AI 영상 편집 (브루 Vrew 활용하기)</li>
+                        <li><strong>3일차:</strong> AI 크리에이터 (유튜브 채널 개설 및 업로드)</li>
+                    </ul>
+                    <div class="w-12 h-1 bg-emerald-200 rounded-full group-hover:w-20 transition-all"></div>
                 </div>
             </div>
         </section>
@@ -223,19 +233,19 @@
                     <p class="text-lg text-teal-200">수업 중에 만든 작품을 실제 굿즈로 제작해 드립니다.</p>
                 </div>
                 <div class="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6">
-                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-3xl text-center group border border-white/10 hover:bg-white/20 transition duration-300 cursor-pointer">
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-3xl text-center group border border-white/10 hover:bg-white/20 transition duration-300">
                         <div class="aspect-square bg-white rounded-2xl mb-4 overflow-hidden relative shadow-lg"><img src="머그컵사진.png" alt="머그컵" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.src='https://via.placeholder.com/300x300.png?text=Mug'"></div>
                         <h5 class="font-bold text-white text-lg">나만의 머그컵</h5>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-3xl text-center group border border-white/10 hover:bg-white/20 transition duration-300 cursor-pointer">
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-3xl text-center group border border-white/10 hover:bg-white/20 transition duration-300">
                         <div class="aspect-square bg-white rounded-2xl mb-4 overflow-hidden relative shadow-lg"><img src="에코백사진.png" alt="에코백" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.src='https://via.placeholder.com/300x300.png?text=Ecobag'"></div>
                         <h5 class="font-bold text-white text-lg">에코백</h5>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-3xl text-center group border border-white/10 hover:bg-white/20 transition duration-300 cursor-pointer">
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-3xl text-center group border border-white/10 hover:bg-white/20 transition duration-300">
                         <div class="aspect-square bg-white rounded-2xl mb-4 overflow-hidden relative shadow-lg"><img src="화강암사진.png" alt="석화타일" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.src='https://via.placeholder.com/300x300.png?text=Tile'"></div>
                         <h5 class="font-bold text-white text-lg">석화 타일</h5>
                     </div>
-                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-3xl text-center group border border-white/10 hover:bg-white/20 transition duration-300 cursor-pointer">
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-3xl text-center group border border-white/10 hover:bg-white/20 transition duration-300">
                         <div class="aspect-square bg-white rounded-2xl mb-4 overflow-hidden relative shadow-lg"><img src="키링사진.png" alt="키링" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.src='https://via.placeholder.com/300x300.png?text=Keyring'"></div>
                         <h5 class="font-bold text-white text-lg">캐릭터 키링</h5>
                     </div>
@@ -252,43 +262,39 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- 1. 거제3동 -->
                 <div class="clean-card p-6 flex items-start gap-6 organic-shape group hover:border-teal-400">
-                    <div class="w-16 h-16 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-3xl shrink-0 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">🏢</div>
+                    <div class="w-16 h-16 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-3xl group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">🏢</div>
                     <div>
-                        <h4 class="font-bold text-xl text-slate-800 mb-1">거제3동 행복복지센터 2층 정보화교육장</h4>
+                        <h4 class="font-bold text-xl text-slate-800 mb-1">거제3동 행복복지센터</h4>
                         <p class="text-slate-500 mb-3">부산광역시 연제구 거제시장로 22 (2층)</p>
                         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 text-xs font-bold text-teal-700">1호선 시청역 / 3호선 거제역</div>
                     </div>
-                    <button onclick="openModal('거제3동 행복복지센터 2층 정보화교육장')" class="ml-auto px-4 py-2 bg-slate-800 text-white text-sm font-bold rounded-lg hover:bg-teal-600 transition shadow-lg self-center">신청하기</button>
                 </div>
                 <!-- 2. 부산유라시아플랫폼 -->
                 <div class="clean-card p-6 flex items-start gap-6 organic-shape group hover:border-teal-400">
-                    <div class="w-16 h-16 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-3xl shrink-0 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">🚆</div>
+                    <div class="w-16 h-16 rounded-full bg-teal-100 text-teal-600 flex items-center justify-center text-3xl group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">🚆</div>
                     <div>
-                        <h4 class="font-bold text-xl text-slate-800 mb-1">부산유라시아플랫폼 112호</h4>
+                        <h4 class="font-bold text-xl text-slate-800 mb-1">부산유라시아플랫폼</h4>
                         <p class="text-slate-500 mb-3">부산광역시 동구 중앙대로 206 (112호)</p>
                         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-50 text-xs font-bold text-teal-700">1호선 부산역 광장</div>
                     </div>
-                    <button onclick="openModal('부산유라시아플랫폼 112호')" class="ml-auto px-4 py-2 bg-slate-800 text-white text-sm font-bold rounded-lg hover:bg-teal-600 transition shadow-lg self-center">신청하기</button>
                 </div>
                 <!-- 3. 북구청 제2별관 -->
                 <div class="clean-card p-6 flex items-start gap-6 organic-shape group hover:border-emerald-400">
-                    <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">🏛️</div>
+                    <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">🏛️</div>
                     <div>
                         <h4 class="font-bold text-xl text-slate-800 mb-1">북구청 제2별관 정보화교육장</h4>
                         <p class="text-slate-500 mb-3">부산광역시 북구 낙동대로 1570번길 33</p>
                         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-xs font-bold text-emerald-700">2호선 구명역 1번 출구</div>
                     </div>
-                    <button onclick="openModal('북구청 제2별관 정보화교육장')" class="ml-auto px-4 py-2 bg-slate-800 text-white text-sm font-bold rounded-lg hover:bg-emerald-600 transition shadow-lg self-center">신청하기</button>
                 </div>
                 <!-- 4. 부산도서관 -->
                 <div class="clean-card p-6 flex items-start gap-6 organic-shape group hover:border-emerald-400">
-                    <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">📖</div>
+                    <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">📖</div>
                     <div>
                         <h4 class="font-bold text-xl text-slate-800 mb-1">부산도서관 2층 소담방5</h4>
                         <p class="text-slate-500 mb-3">부산광역시 사상구 사상로 310번길 33</p>
                         <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-xs font-bold text-emerald-700">2호선 덕포역 2번 출구</div>
                     </div>
-                    <button onclick="openModal('부산도서관 2층 소담방5')" class="ml-auto px-4 py-2 bg-slate-800 text-white text-sm font-bold rounded-lg hover:bg-emerald-600 transition shadow-lg self-center">신청하기</button>
                 </div>
             </div>
         </section>
@@ -300,10 +306,6 @@
                     <div>
                         <h3 class="text-2xl font-bold">통합 교육 일정 (2월 ~ 4월)</h3>
                         <p class="text-teal-200 mt-1">원하시는 기간을 확인하세요.</p>
-                    </div>
-                    <div class="flex gap-2">
-                        <span class="px-4 py-2 bg-white/20 rounded-lg text-sm font-bold backdrop-blur-sm">5기 운영중</span>
-                        <span class="px-4 py-2 bg-white/10 rounded-lg text-sm font-bold backdrop-blur-sm text-teal-200">4기 운영중</span>
                     </div>
                 </div>
                 <div class="overflow-x-auto">
@@ -336,7 +338,7 @@
             </div>
         </section>
 
-        <!-- 상세 교육 계획서 섹션 -->
+        <!-- 상세 교육 계획서 섹션 (수정됨: 1일차~3일차 상세 내용 반영) -->
         <section id="plan" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-32">
             <!-- 1. 거제3동 & 유라시아 (5주) -->
             <div class="clean-card overflow-hidden organic-shape border-none mb-12">
@@ -347,60 +349,38 @@
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse forest-table min-w-[800px]">
                         <thead>
-                            <tr class="text-white"><th class="p-4 bg-teal-800 w-20 text-center">주차</th><th class="p-4 bg-teal-800 w-20 text-center">일차</th><th class="p-4 bg-teal-800 w-32">구분</th><th class="p-4 bg-teal-800 w-48">차시명</th><th class="p-4 bg-teal-900">주요 학습 내용</th><th class="p-4 bg-teal-900 w-32 text-center">결과물</th></tr>
+                            <tr class="text-white"><th class="p-4 bg-teal-800 w-20 text-center">기수</th><th class="p-4 bg-teal-800 w-20 text-center">일차</th><th class="p-4 bg-teal-800 w-32">구분</th><th class="p-4 bg-teal-800 w-96">주요 학습 내용</th><th class="p-4 bg-teal-900 w-32 text-center">비고</th></tr>
                         </thead>
                         <tbody class="text-sm font-medium text-slate-700 bg-white">
-                            <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-teal-700 bg-teal-50/30">1주차</td><td class="p-4 border-r text-center">1일차</td><td class="p-4 border-r text-slate-500">OT / 기초</td><td class="p-4 border-r font-bold">컴퓨터와 친해지기</td><td class="p-4">컴퓨터 구성 이해, 전원 켜기·끄기, 마우스/키보드 기본 사용, 바탕화면/창 조작</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">2일차</td><td class="p-4 border-r text-slate-500">컴퓨터 기초</td><td class="p-4 border-r font-bold">문서만들기</td><td class="p-4">문자 입력, 기본 프로그램 활용, 파일/폴더 생성 및 정리</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">3일차</td><td class="p-4 border-r text-slate-500">인터넷 기초</td><td class="p-4 border-r font-bold">인터넷 활용 기초</td><td class="p-4">구글 계정 만들기, 검색/즐겨찾기, 안전한 인터넷 사용, 예쁜 그림 검색/도안제작</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <!-- 2주차 -->
-                            <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-teal-700 bg-teal-50/30">2주차</td><td class="p-4 border-r text-center">4일차</td><td class="p-4 border-r text-slate-500">생활 활용</td><td class="p-4 border-r font-bold">생활 속 디지털 활용</td><td class="p-4">① 등기부등본 확인 ② 정부24 민원 조회 및 발급</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">5일차</td><td class="p-4 border-r text-slate-500">인터넷 활용</td><td class="p-4 border-r font-bold">이미지 만들기 (AI)</td><td class="p-4">예쁜 그림 검색(AI 체험), 나만의 작품 도안 제작</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">6일차</td><td class="p-4 border-r text-slate-500">창작 실습</td><td class="p-4 border-r font-bold text-teal-600">굿즈만들기 1</td><td class="p-4">도안 제작 및 전사 작품(머그컵) 만들기</td><td class="p-4 border-l text-center font-bold text-teal-600 bg-teal-50">☕ 전사컵</td></tr>
-                            <!-- 3주차 -->
-                            <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-teal-700 bg-teal-50/30">3주차</td><td class="p-4 border-r text-center">7일차</td><td class="p-4 border-r text-slate-500">영상 제작</td><td class="p-4 border-r font-bold">이미지 영상 만들기</td><td class="p-4">사진 불러오기, 간단한 이미지를 영상으로 만들기</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">8일차</td><td class="p-4 border-r text-slate-500">콘텐츠 제작</td><td class="p-4 border-r font-bold">음악 영상만들기</td><td class="p-4">음악 파일 활용, 이미지·음악 결합, 짧은 영상 제작</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">9일차</td><td class="p-4 border-r text-slate-500">창작 실습</td><td class="p-4 border-r font-bold text-teal-600">굿즈만들기 2</td><td class="p-4">도안 제작 및 전사 작품(에코백) 만들기</td><td class="p-4 border-l text-center font-bold text-teal-600 bg-teal-50">👜 에코백</td></tr>
-                            <!-- 4주차 -->
-                            <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-teal-700 bg-teal-50/30">4주차</td><td class="p-4 border-r text-center">10일차</td><td class="p-4 border-r text-slate-500">AI 크리에이터</td><td class="p-4 border-r font-bold">유튜브 이해</td><td class="p-4">유튜브 구조 이해, 계정 및 채널 만들기</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">11일차</td><td class="p-4 border-r text-slate-500">AI 크리에이터</td><td class="p-4 border-r font-bold">영상 업로드 / 안전</td><td class="p-4">영상 업로드, 제목/설명 작성, 저작권 및 개인정보 보호 교육</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">12일차</td><td class="p-4 border-r text-slate-500">창작 실습</td><td class="p-4 border-r font-bold text-teal-600">굿즈만들기 3</td><td class="p-4">도안 제작 및 전사 작품(석화타일) 만들기</td><td class="p-4 border-l text-center font-bold text-teal-600 bg-teal-50">🖼️ 석화타일</td></tr>
-                            <!-- 5주차 -->
-                            <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-teal-700 bg-teal-50/30">5주차</td><td class="p-4 border-r text-center">13일차</td><td class="p-4 border-r text-slate-500">온라인 소통</td><td class="p-4 border-r font-bold">나만의 패들렛 만들기</td><td class="p-4">패들렛 접속 및 화면 구성 이해, 온라인 게시판 만들기</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">14일차</td><td class="p-4 border-r text-slate-500">온라인 소통</td><td class="p-4 border-r font-bold">패들렛에 작품 올리기</td><td class="p-4">이미지·영상 작품 업로드, 글 작성 및 댓글 소통</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">15일차</td><td class="p-4 border-r text-slate-500">창작 실습</td><td class="p-4 border-r font-bold text-teal-600">굿즈만들기 4</td><td class="p-4">전사 작품(가죽 열쇠고리) 만들기, 결과물 공유 및 수료</td><td class="p-4 border-l text-center font-bold text-teal-600 bg-teal-50">🔑 열쇠고리</td></tr>
+                            <!-- PC 기초 (1~2기) -->
+                            <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-teal-700 bg-teal-50/30">1~2기<br>(PC)</td><td class="p-4 border-r text-center">1일차</td><td class="p-4 border-r font-bold">컴퓨터와 친해지기</td><td class="p-4">전원 켜기/끄기, 마우스/키보드 사용법, 바탕화면 다루기</td><td class="p-4 border-l text-center text-slate-400">PC 기초</td></tr>
+                            <tr><td class="p-4 border-r text-center">2일차</td><td class="p-4 border-r font-bold">문서 만들기</td><td class="p-4">한글 타자 연습, 간단한 글쓰기 및 저장</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
+                            <tr><td class="p-4 border-r text-center">3일차</td><td class="p-4 border-r font-bold">인터넷 활용</td><td class="p-4">구글 계정 생성, 검색/즐겨찾기, 정부24 민원 조회 및 발급</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
+                            
+                            <!-- AI 활용 (3~5기) -->
+                            <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-teal-700 bg-teal-50/30">3~5기<br>(AI)</td><td class="p-4 border-r text-center">1일차</td><td class="p-4 border-r font-bold">AI 아트</td><td class="p-4">이미지 만들기(생성형 AI), 이미지를 영상으로 만들기</td><td class="p-4 border-l text-center text-slate-400">AI 활용</td></tr>
+                            <tr><td class="p-4 border-r text-center">2일차</td><td class="p-4 border-r font-bold">영상 편집</td><td class="p-4">브루(Vrew)로 영상 제작하기</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
+                            <tr><td class="p-4 border-r text-center">3일차</td><td class="p-4 border-r font-bold">크리에이터</td><td class="p-4">AI 크리에이터: 유튜브 계정 및 채널 만들기</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
+            
             <!-- 2. 북구청 & 부산도서관 (4주) -->
             <div class="clean-card overflow-hidden organic-shape border-none">
                 <div class="p-8 bg-emerald-700 text-white flex justify-between items-center flex-wrap gap-4">
                     <div><h3 class="text-2xl font-bold">북구청 제2별관 & 부산도서관</h3><p class="text-emerald-100 mt-1">상세 교육 계획서 (4주 / 12차시 / 주 3회)</p></div>
-                    <span class="px-4 py-2 bg-white/20 rounded-lg text-sm font-bold backdrop-blur-sm">총 4주 과정</span>
+                    <span class="px-4 py-2 bg-white/20 rounded-lg text-sm font-bold backdrop-blur-sm">총 4주 과정 (전체 AI)</span>
                 </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse forest-table min-w-[800px]">
                         <thead>
-                            <tr class="text-white"><th class="p-4 bg-emerald-800 w-20 text-center">주차</th><th class="p-4 bg-emerald-800 w-20 text-center">일차</th><th class="p-4 bg-emerald-800 w-32">구분</th><th class="p-4 bg-emerald-800 w-48">차시명</th><th class="p-4 bg-emerald-900">주요 학습 내용</th><th class="p-4 bg-emerald-900 w-32 text-center">결과물</th></tr>
+                            <tr class="text-white"><th class="p-4 bg-emerald-800 w-20 text-center">주차</th><th class="p-4 bg-emerald-800 w-20 text-center">일차</th><th class="p-4 bg-emerald-800 w-32">구분</th><th class="p-4 bg-emerald-800 w-48">주요 내용</th><th class="p-4 bg-emerald-900">상세 학습 내용</th><th class="p-4 bg-emerald-900 w-32 text-center">비고</th></tr>
                         </thead>
                         <tbody class="text-sm font-medium text-slate-700 bg-white">
-                            <!-- 1주차 -->
-                            <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-emerald-700 bg-emerald-50/30">1주차</td><td class="p-4 border-r text-center">1일차</td><td rowspan="2" class="p-4 border-r text-slate-500">기초 다지기</td><td class="p-4 border-r font-bold">컴퓨터와 친해지기</td><td class="p-4">컴퓨터 구성 이해, 문자 입력, 기본 프로그램 활용, 파일 관리</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">2일차</td><td class="p-4 border-r font-bold">인터넷 활용 기초</td><td class="p-4">구글 계정 만들기, 검색, 안전한 인터넷 사용, 도안 제작</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">3일차</td><td class="p-4 border-r text-slate-500">창작 실습</td><td class="p-4 border-r font-bold text-emerald-600">굿즈만들기 1</td><td class="p-4">도안 제작 및 전사 작품(머그컵) 만들기</td><td class="p-4 border-l text-center font-bold text-emerald-600 bg-emerald-50">☕ 전사컵</td></tr>
-                            <!-- 2주차 -->
-                            <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-emerald-700 bg-emerald-50/30">2주차</td><td class="p-4 border-r text-center">4일차</td><td class="p-4 border-r text-slate-500">생활 활용</td><td class="p-4 border-r font-bold">생활 속 디지털 활용</td><td class="p-4">① 등기부등본 ② 정부24 민원 조회 및 발급</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">5일차</td><td class="p-4 border-r text-slate-500">콘텐츠 제작</td><td class="p-4 border-r font-bold">이미지, 영상, 음악만들기</td><td class="p-4">예쁜 그림 검색(AI 체험), 오디오로 음악앨범, 짧은 영상 제작</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">6일차</td><td class="p-4 border-r text-slate-500">창작 실습</td><td class="p-4 border-r font-bold text-emerald-600">굿즈만들기 2</td><td class="p-4">도안 제작 및 전사 작품(에코백) 만들기</td><td class="p-4 border-l text-center font-bold text-emerald-600 bg-emerald-50">👜 에코백</td></tr>
-                            <!-- 3주차 -->
-                            <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-emerald-700 bg-emerald-50/30">3주차</td><td class="p-4 border-r text-center">7일차</td><td rowspan="2" class="p-4 border-r text-slate-500">AI 크리에이터</td><td class="p-4 border-r font-bold">유튜브 이해</td><td class="p-4">유튜브 구조 이해, 계정 및 채널 만들기</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">8일차</td><td class="p-4 border-r font-bold">영상 업로드 / 안전</td><td class="p-4">영상 업로드, 제목/설명 작성, 저작권 및 개인정보 보호, 주의사항</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">9일차</td><td class="p-4 border-r text-slate-500">창작 실습</td><td class="p-4 border-r font-bold text-emerald-600">굿즈만들기 3</td><td class="p-4">도안 제작 및 전사 작품(석화타일) 만들기</td><td class="p-4 border-l text-center font-bold text-emerald-600 bg-emerald-50">🖼️ 석화타일</td></tr>
-                            <!-- 4주차 -->
-                            <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-emerald-700 bg-emerald-50/30">4주차</td><td class="p-4 border-r text-center">10일차</td><td rowspan="2" class="p-4 border-r text-slate-500">온라인 소통</td><td class="p-4 border-r font-bold">나만의 패들렛 만들기</td><td class="p-4">패들렛 접속 및 화면 구성 이해, 온라인 게시판 만들기</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">11일차</td><td class="p-4 border-r font-bold">패들렛에 작품 올리기</td><td class="p-4">이미지·영상 작품 업로드, 글 작성 및 댓글 소통</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
-                            <tr><td class="p-4 border-r text-center">12일차</td><td class="p-4 border-r text-slate-500">창작 실습</td><td class="p-4 border-r font-bold text-emerald-600">굿즈만들기 4</td><td class="p-4">전사 작품(가죽 열쇠고리) 만들기, 결과물 공유 및 수료</td><td class="p-4 border-l text-center font-bold text-emerald-600 bg-emerald-50">🔑 열쇠고리</td></tr>
+                            <tr><td rowspan="3" class="p-4 border-r text-center font-bold text-emerald-700 bg-emerald-50/30">1~4기<br>(공통)</td><td class="p-4 border-r text-center">1일차</td><td class="p-4 border-r text-slate-500">AI 아트</td><td class="p-4 border-r font-bold">이미지 생성</td><td class="p-4">이미지 만들기, 이미지를 영상으로 만들기</td><td class="p-4 border-l text-center text-slate-400">AI 활용</td></tr>
+                            <tr><td class="p-4 border-r text-center">2일차</td><td class="p-4 border-r text-slate-500">영상 편집</td><td class="p-4 border-r font-bold">브루(Vrew) 활용</td><td class="p-4">브루로 영상 제작하기</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
+                            <tr><td class="p-4 border-r text-center">3일차</td><td class="p-4 border-r text-slate-500">크리에이터</td><td class="p-4 border-r font-bold">유튜브 시작</td><td class="p-4">AI 크리에이터: 유튜브 계정 및 채널 만들기</td><td class="p-4 border-l text-center text-slate-400">-</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -424,7 +404,7 @@
                     <p class="text-sm text-slate-500 mb-6 font-medium">2층 정보화교육장</p>
                     <div class="space-y-4 mb-8 flex-grow">
                         <div class="flex items-start gap-3 text-sm"><span class="text-teal-400 mt-0.5">🕒</span><div><span class="font-bold text-teal-600 block text-base">09:30 ~ 11:30</span><span class="text-xs text-slate-400">2시간 수업</span></div></div>
-                        <div class="flex items-start gap-3 text-sm"><span class="text-teal-400 mt-0.5">📚</span><div class="flex flex-col gap-1"><span class="text-sm text-slate-600">• 1기 : 컴퓨터 기초</span><span class="text-sm text-slate-600">• 2기 : 인터넷 활용</span><span class="text-sm text-slate-600">• 3기 : 콘텐츠 제작</span><span class="text-sm text-slate-600">• 4기 : AI크리에이터</span><span class="text-sm text-slate-600">• 5기 : 온라인 게시판에 올리기</span></div></div>
+                        <div class="flex items-start gap-3 text-sm"><span class="text-teal-400 mt-0.5">📚</span><div class="flex flex-col gap-1"><span class="text-sm text-slate-600">• 1~2기: PC 기초</span><span class="text-sm text-slate-600">• 3~5기: AI 활용</span></div></div>
                     </div>
                     <button class="w-full py-4 rounded-xl bg-teal-50 text-teal-800 font-bold hover:bg-teal-600 hover:text-white transition text-lg border border-teal-100 pointer-events-none">신청하기</button>
                 </div>
@@ -436,7 +416,7 @@
                     <p class="text-sm text-slate-500 mb-6 font-medium">112호</p>
                     <div class="space-y-4 mb-8 flex-grow">
                         <div class="flex items-start gap-3 text-sm"><span class="text-teal-400 mt-0.5">🕒</span><div><span class="font-bold text-slate-700 block text-base">14:00 ~ 16:00</span><span class="text-xs text-slate-400">2시간 수업</span></div></div>
-                        <div class="flex items-start gap-3 text-sm"><span class="text-teal-400 mt-0.5">📚</span><div class="flex flex-col gap-1"><span class="text-sm text-slate-600">• 1기 : 컴퓨터 기초</span><span class="text-sm text-slate-600">• 2기 : 인터넷 활용</span><span class="text-sm text-slate-600">• 3기 : 콘텐츠 제작</span><span class="text-sm text-slate-600">• 4기 : AI크리에이터</span><span class="text-sm text-slate-600">• 5기 : 온라인 게시판에 올리기</span></div></div>
+                        <div class="flex items-start gap-3 text-sm"><span class="text-teal-400 mt-0.5">📚</span><div class="flex flex-col gap-1"><span class="text-sm text-slate-600">• 1~2기: PC 기초</span><span class="text-sm text-slate-600">• 3~5기: AI 활용</span></div></div>
                     </div>
                     <button class="w-full py-4 rounded-xl bg-teal-50 text-teal-800 font-bold hover:bg-slate-700 hover:text-white transition text-lg border border-teal-100 pointer-events-none">신청하기</button>
                 </div>
@@ -448,7 +428,7 @@
                     <p class="text-sm text-slate-500 mb-6 font-medium">정보화교육장</p>
                     <div class="space-y-4 mb-8 flex-grow">
                         <div class="flex items-start gap-3 text-sm"><span class="text-emerald-400 mt-0.5">🕒</span><div><span class="font-bold text-slate-700 block text-base">10:00 ~ 12:00</span><span class="text-xs text-slate-400">2시간 수업</span></div></div>
-                        <div class="flex items-start gap-3 text-sm"><span class="text-emerald-400 mt-0.5">📚</span><div class="flex flex-col gap-1"><span class="text-sm text-slate-600">• 1기 : 컴퓨터 기초 및 인터넷 기초</span><span class="text-sm text-slate-600">• 2기 : 인터넷 활용 및 콘텐츠 제작</span><span class="text-sm text-slate-600">• 3기 : AI크리에이터</span><span class="text-sm text-slate-600">• 4기 : 온라인 게시판에 올리기</span></div></div>
+                        <div class="flex items-start gap-3 text-sm"><span class="text-emerald-400 mt-0.5">📚</span><div class="flex flex-col gap-1"><span class="text-sm text-slate-600">• 1~4기: AI 활용 전체</span></div></div>
                     </div>
                     <button class="w-full py-4 rounded-xl bg-emerald-50 text-emerald-800 font-bold hover:bg-emerald-600 hover:text-white transition text-lg border border-emerald-100 pointer-events-none">신청하기</button>
                 </div>
@@ -460,7 +440,7 @@
                     <p class="text-sm text-slate-500 mb-6 font-medium">2층 소담방5</p>
                     <div class="space-y-4 mb-8 flex-grow">
                         <div class="flex items-start gap-3 text-sm"><span class="text-emerald-400 mt-0.5">🕒</span><div><span class="font-bold text-slate-700 block text-base">14:00 ~ 16:00</span><span class="text-xs text-slate-400">2시간 수업</span></div></div>
-                        <div class="flex items-start gap-3 text-sm"><span class="text-emerald-400 mt-0.5">📚</span><div class="flex flex-col gap-1"><span class="text-sm text-slate-600">• 1기 : 컴퓨터 기초 및 인터넷 기초</span><span class="text-sm text-slate-600">• 2기 : 인터넷 활용 및 콘텐츠 제작</span><span class="text-sm text-slate-600">• 3기 : AI크리에이터</span><span class="text-sm text-slate-600">• 4기 : 온라인 게시판에 올리기</span></div></div>
+                        <div class="flex items-start gap-3 text-sm"><span class="text-emerald-400 mt-0.5">📚</span><div class="flex flex-col gap-1"><span class="text-sm text-slate-600">• 1~4기: AI 활용 전체</span></div></div>
                     </div>
                     <button class="w-full py-4 rounded-xl bg-emerald-50 text-emerald-800 font-bold hover:bg-emerald-600 hover:text-white transition text-lg border border-emerald-100 pointer-events-none">신청하기</button>
                 </div>
@@ -487,32 +467,45 @@
                 </div>
             </div>
             
-            <!-- QR코드 공유 버튼 -->
-            <div class="mb-8 text-center">
-                <button onclick="openQrModal()" class="text-teal-600 font-bold hover:underline flex items-center justify-center gap-2 mx-auto px-4 py-2 bg-teal-50 rounded-lg hover:bg-teal-100 transition">
-                    <span>📱</span> 모바일로 보기 (QR코드)
-                </button>
-            </div>
-
             <p class="opacity-60">© 2026 Busan Smart Senior Program. All rights reserved.</p>
         </footer>
     </main>
 
     <!-- 신청 양식 팝업 (모달) -->
     <div id="applicationModal" class="modal-overlay">
-        <div class="modal-content relative overflow-hidden">
-            <div class="bg-teal-700 p-8 flex justify-between items-center sticky top-0 z-10">
-                <div><h3 class="text-2xl font-bold text-white">수강 신청하기</h3><p class="text-teal-100 text-sm mt-1">간편하게 신청하고 문자로 안내받으세요.</p></div>
-                <button onclick="closeModal()" class="text-teal-200 hover:text-white transition p-2 bg-teal-800 rounded-full"><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg></button>
+        <div class="modal-content">
+            <div class="bg-teal-700 p-6 flex justify-between items-center sticky top-0 z-10 shrink-0">
+                <div>
+                    <h3 class="text-2xl font-bold text-white">수강 신청하기</h3>
+                    <p class="text-teal-100 text-sm mt-1">원하시는 기수를 모두 선택해주세요.</p>
+                </div>
+                <button onclick="closeModal()" class="text-teal-200 hover:text-white transition p-2 bg-teal-800 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
             </div>
-            <div class="p-8">
+            <div class="p-8 overflow-y-auto">
                 <form id="applyForm" onsubmit="submitToGoogleSheet(event)">
                     <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">신청 교육장</label><input type="text" id="selectedCenter" name="center" class="w-full p-4 bg-teal-50 rounded-2xl text-slate-800 font-bold border-none text-lg" readonly></div>
+                    
+                    <!-- [수정] 기수 선택 (체크박스 + 날짜 표시) -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold text-slate-700 mb-2">신청 기수 (중복 선택 가능)</label>
+                        <div id="termContainer" class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                            <!-- 자바스크립트로 동적 생성됨 -->
+                        </div>
+                    </div>
+
                     <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">성함</label><input type="text" id="userName" name="name" required placeholder="예: 홍길동" class="w-full p-4 border-2 border-teal-100 rounded-2xl focus:outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-100 transition text-lg placeholder:text-slate-300"></div>
                     <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">연락처</label><input type="tel" id="userPhone" name="phone" required placeholder="예: 01012345678" maxlength="13" oninput="autoHyphen(this)" class="w-full p-4 border-2 border-teal-100 rounded-2xl focus:outline-none focus:border-teal-500 focus:ring-4 focus:ring-teal-100 transition text-lg placeholder:text-slate-300"><p class="text-xs text-slate-400 mt-1">* 숫자만 입력하시면 자동으로 하이픈(-)이 입력됩니다.</p></div>
+                    
                     <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">성별</label><div class="grid grid-cols-2 gap-3"><label class="cursor-pointer"><input type="radio" name="gender" value="남" class="peer sr-only" required><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition">남성</div></label><label class="cursor-pointer"><input type="radio" name="gender" value="여" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition">여성</div></label></div></div>
+                    
                     <div class="mb-8"><label class="block text-sm font-bold text-slate-700 mb-2">연령대</label><div class="grid grid-cols-3 gap-3"><label class="cursor-pointer"><input type="radio" name="ageGroup" value="50대" class="peer sr-only" required><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition">50대</div></label><label class="cursor-pointer"><input type="radio" name="ageGroup" value="60대" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition">60대</div></label><label class="cursor-pointer"><input type="radio" name="ageGroup" value="70대 이상" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition">70대 이상</div></label></div><p class="text-xs text-slate-400 mt-2">* 해당되는 연령대를 선택해주세요.</p></div>
+                    
                     <div id="residenceContainer" class="mb-8 hidden"><label class="block text-sm font-bold text-slate-700 mb-2">거주지 확인 <span class="text-xs font-normal text-teal-600 ml-2" id="residenceNote"></span></label><div class="grid grid-cols-2 gap-3"><label class="cursor-pointer"><input type="radio" name="residence" value="local" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition" id="labelLocal">해당 구 거주</div></label><label class="cursor-pointer"><input type="radio" name="residence" value="other" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center text-slate-500 font-bold peer-checked:border-teal-600 peer-checked:text-teal-700 peer-checked:bg-teal-50 hover:bg-teal-50 transition">그 외 지역</div></label></div></div>
+                    
                     <button type="submit" id="submitBtn" class="w-full py-5 bg-teal-600 hover:bg-teal-700 text-white font-bold rounded-2xl transition shadow-xl shadow-teal-500/30 flex justify-center items-center gap-2 text-xl transform active:scale-95"><span>제출하기</span><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg></button>
                 </form>
             </div>
@@ -523,7 +516,6 @@
     <div id="qrModal" class="modal-overlay" onclick="closeQrModal()">
         <div class="modal-content p-8 text-center max-w-sm" onclick="event.stopPropagation()">
             <h3 class="text-xl font-bold mb-4 text-slate-800">QR코드로 공유하기</h3>
-            <!-- API를 사용하여 QR코드 생성 -->
             <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://dodam20190325.github.io/senior3&color=115E59" class="mx-auto mb-4 border-2 border-teal-100 p-2 rounded-xl" alt="QR Code">
             <p class="text-slate-500 text-sm">스마트폰 카메라로 스캔하시면<br>이 페이지로 바로 연결됩니다.</p>
             <button onclick="closeQrModal()" class="mt-6 px-6 py-2 bg-slate-100 rounded-lg text-slate-600 hover:bg-slate-200 font-bold transition">닫기</button>
@@ -531,103 +523,90 @@
     </div>
 
     <script>
-        // 전화번호 자동 하이픈
-        function autoHyphen(target) {
-            target.value = target.value
-                .replace(/[^0-9]/g, '')
-                .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3")
-                .replace(/(\-{1,2})$/g, "");
-        }
-
-        // ✅ [중요] 1단계에서 복사한 '웹 앱 URL'을 여기에 붙여넣으세요.
+        function autoHyphen(target) { target.value = target.value.replace(/[^0-9]/g, '').replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, ""); }
+        
+        // ✅ [중요] 구글 앱스 스크립트 웹 앱 URL (사용자 제공)
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx7THzuK4KcY86FkU_2aw8JW9Om6PzbGnFlV4upxAcBYvFnFTThy-aFlFLdCd0ci8M_8g/exec"; 
         
-        // 데모 모드 (URL이 없거나 테스트 환경일 때 true로 동작)
         const isDemoMode = false;
-
-        // --- 네비게이션 활성화 스크립트 ---
-        const navLinks = document.querySelectorAll('.nav-link');
-        const sections = document.querySelectorAll('section');
-
-        // 1. 클릭 시 활성화
-        navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                navLinks.forEach(l => l.classList.remove('active')); 
-                this.classList.add('active'); 
-            });
-        });
-
-        // 2. 스크롤 시 자동 활성화 (Scroll Spy)
-        window.addEventListener('scroll', () => {
-            let current = '';
-            
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= (sectionTop - 180)) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
-                }
-            });
-        });
+        const navLinks = document.querySelectorAll('.nav-link'); const sections = document.querySelectorAll('section');
+        navLinks.forEach(link => { link.addEventListener('click', function() { navLinks.forEach(l => l.classList.remove('active')); this.classList.add('active'); }); });
+        window.addEventListener('scroll', () => { let current = ''; sections.forEach(section => { const sectionTop = section.offsetTop; if (pageYOffset >= (sectionTop - 180)) { current = section.getAttribute('id'); } }); navLinks.forEach(link => { link.classList.remove('active'); if (link.getAttribute('href').includes(current)) { link.classList.add('active'); } }); });
+        function resetNav() { navLinks.forEach(link => link.classList.remove('active')); }
+        const menuBtn = document.getElementById('mobile-menu-btn'); const menu = document.getElementById('mobile-menu'); const mobileLinks = menu.querySelectorAll('a');
+        menuBtn.addEventListener('click', function(e) { e.stopPropagation(); if (menu.classList.contains('hidden')) { menu.classList.remove('hidden'); menu.classList.add('block'); } else { menu.classList.add('hidden'); menu.classList.remove('block'); } });
+        document.addEventListener('click', function(e) { if (!menu.classList.contains('hidden') && !menu.contains(e.target)) { menu.classList.add('hidden'); menu.classList.remove('block'); } });
+        mobileLinks.forEach(link => { link.addEventListener('click', () => { menu.classList.add('hidden'); menu.classList.remove('block'); }); });
         
-        // 로고 클릭시 네비게이션 초기화
-        function resetNav() {
-            navLinks.forEach(link => link.classList.remove('active'));
-        }
-        
-        // --- 모바일 메뉴 토글 및 닫기 기능 ---
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        const mobileLinks = menu.querySelectorAll('a');
-
-        menuBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); 
-            if (menu.classList.contains('hidden')) {
-                menu.classList.remove('hidden');
-                menu.classList.add('block');
-            } else {
-                menu.classList.add('hidden');
-                menu.classList.remove('block');
-            }
-        });
-
-        document.addEventListener('click', function(e) {
-            if (!menu.classList.contains('hidden') && !menu.contains(e.target)) {
-                menu.classList.add('hidden');
-                menu.classList.remove('block');
-            }
-        });
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-                menu.classList.remove('block');
-            });
-        });
-
-        // --- 모달 기능 ---
-        function openModal(centerName) {
-            document.getElementById('selectedCenter').value = centerName;
-            document.getElementById('applicationModal').classList.add('modal-active');
+        function openModal(centerName) { 
+            document.getElementById('selectedCenter').value = centerName; 
+            document.getElementById('applicationModal').classList.add('modal-active'); 
             document.body.style.overflow = 'hidden'; 
             
-            // 거주지 선택 초기화
             const resContainer = document.getElementById('residenceContainer'); 
             const labelLocal = document.getElementById('labelLocal'); 
             const resNote = document.getElementById('residenceNote'); 
+            const termContainer = document.getElementById('termContainer');
+            
+            // 초기화
             document.querySelectorAll('input[name="residence"]').forEach(el => el.checked = false); 
+            termContainer.innerHTML = ''; // 기수 선택 초기화
+
+            // 기수 생성 로직 (다중 선택 체크박스 + 날짜 포함)
+            let terms = [];
+            
+            if (centerName.includes('거제3동')) {
+                // 거제3동 (월수금 09:30)
+                terms = [
+                    {val: '1기', label: '1기 (PC기초) : 02.23 ~ 02.28 (월수금)'},
+                    {val: '2기', label: '2기 (PC기초) : 03.02 ~ 03.07 (화수금)'},
+                    {val: '3기', label: '3기 (AI활용) : 03.16 ~ 03.21 (월수금)'},
+                    {val: '4기', label: '4기 (AI활용) : 03.30 ~ 04.04 (월수금)'},
+                    {val: '5기', label: '5기 (AI활용) : 04.06 ~ 04.11 (월수금)'}
+                ];
+            } else if (centerName.includes('유라시아')) {
+                // 유라시아 (월수금 14:00)
+                terms = [
+                    {val: '1기', label: '1기 (PC기초) : 02.23 ~ 02.28 (월수금)'},
+                    {val: '2기', label: '2기 (PC기초) : 03.02 ~ 03.07 (화수금)'},
+                    {val: '3기', label: '3기 (AI활용) : 03.16 ~ 03.21 (월수금)'},
+                    {val: '4기', label: '4기 (AI활용) : 03.30 ~ 04.04 (월수금)'},
+                    {val: '5기', label: '5기 (AI활용) : 04.06 ~ 04.11 (월수금)'}
+                ];
+            } else if (centerName.includes('북구청')) {
+                // 북구청 (월수금 10:00) - 전체 AI
+                terms = [
+                    {val: '1기', label: '1기 (AI활용) : 03.09 ~ 03.14 (월수금)'},
+                    {val: '2기', label: '2기 (AI활용) : 03.23 ~ 03.28 (월수금)'},
+                    {val: '3기', label: '3기 (AI활용) : 04.13 ~ 04.18 (월수금)'},
+                    {val: '4기', label: '4기 (AI활용) : 04.20 ~ 04.25 (월수금)'}
+                ];
+            } else if (centerName.includes('부산도서관')) {
+                // 부산도서관 (월수금 14:00) - 전체 AI
+                terms = [
+                    {val: '1기', label: '1기 (AI활용) : 03.09 ~ 03.14 (월수금)'},
+                    {val: '2기', label: '2기 (AI활용) : 03.23 ~ 03.28 (월수금)'},
+                    {val: '3기', label: '3기 (AI활용) : 04.13 ~ 04.18 (월수금)'},
+                    {val: '4기', label: '4기 (AI활용) : 04.20 ~ 04.25 (월수금)'}
+                ];
+            }
+
+            terms.forEach(t => {
+                const wrapper = document.createElement('div');
+                wrapper.className = 'flex items-start gap-2 mb-2';
+                wrapper.innerHTML = `
+                    <div class="flex items-center h-5">
+                        <input type="checkbox" id="term_${t.val}" name="term" value="${t.val}" class="w-5 h-5 text-teal-600 rounded focus:ring-teal-500 border-gray-300 custom-checkbox">
+                    </div>
+                    <label for="term_${t.val}" class="text-slate-700 font-medium cursor-pointer text-sm leading-5">${t.label}</label>
+                `;
+                termContainer.appendChild(wrapper);
+            });
             
             // 거주지 확인 로직
             if (centerName.includes('연제') || centerName.includes('거제3동')) { 
                 resContainer.classList.remove('hidden'); 
                 labelLocal.textContent = "연제구 거주"; 
-                // data-label 속성 설정
                 document.querySelector('input[value="local"]').setAttribute('data-label', '연제구'); 
                 resNote.textContent = "* 연제구민 우선 선발"; 
             } else if (centerName.includes('북구')) { 
@@ -639,7 +618,7 @@
                 resContainer.classList.add('hidden'); 
             } 
         }
-
+        
         function closeModal() { document.getElementById('applicationModal').classList.remove('modal-active'); document.body.style.overflow = 'auto'; }
         function openQrModal() { document.getElementById('qrModal').classList.add('modal-active'); document.body.style.overflow = 'hidden'; }
         function closeQrModal() { document.getElementById('qrModal').classList.remove('modal-active'); document.body.style.overflow = 'auto'; }
@@ -652,6 +631,9 @@
             const userName = document.getElementById('userName').value;
             
             // 유효성 검사
+            const checkedTerms = Array.from(document.querySelectorAll('input[name="term"]:checked')).map(cb => cb.value);
+            if (checkedTerms.length === 0) { alert("신청하실 기수를 하나 이상 선택해주세요."); return; }
+            
             const ageGroupNode = document.querySelector('input[name="ageGroup"]:checked'); 
             if (!ageGroupNode) { alert("연령대를 선택해주세요."); return; } 
             const ageGroupValue = ageGroupNode.value;
@@ -660,7 +642,6 @@
             if (!genderNode) { alert("성별을 선택해주세요."); return; } 
             const genderValue = genderNode.value;
             
-            // 거주지 데이터 처리 (안전하게 값 가져오기)
             let residenceValue = "-"; 
             const resContainer = document.getElementById('residenceContainer'); 
             
@@ -669,15 +650,7 @@
                 if (!resNode) { alert("거주지를 선택해주세요."); return; } 
                 
                 if (resNode.value === 'local') { 
-                    // data-label 속성에서 지역명 가져오기 (오류 수정됨)
-                    // 만약 data-label 속성이 없거나 오류가 난다면, centerName으로 판단
-                    if (centerName.includes('연제') || centerName.includes('거제3동')) {
-                        residenceValue = "연제구 거주";
-                    } else if (centerName.includes('북구')) {
-                        residenceValue = "북구 거주";
-                    } else {
-                        residenceValue = "해당 지역 거주";
-                    }
+                    residenceValue = resNode.getAttribute('data-label') + " 거주"; 
                 } else { 
                     residenceValue = "그 외 지역"; 
                 } 
@@ -686,22 +659,24 @@
             btn.innerHTML = '<span class="animate-pulse">전송 중... 잠시만 기다려주세요</span>'; 
             btn.disabled = true;
             
-            // 전송 데이터 구성 (Code.gs와 일치)
+            // 교육장 이름 뒤에 선택한 기수 붙여서 전송
+            const finalCenterName = `${centerName} (${checkedTerms.join(', ')})`;
+
             const formData = { 
-                center: centerName, 
+                center: finalCenterName, 
                 name: userName, 
                 phone: document.getElementById('userPhone').value, 
-                ageGroup: ageGroupValue, // 서버에서 받는 이름: ageGroup
-                gender: genderValue,     // 서버에서 받는 이름: gender
-                residence: residenceValue // 서버에서 받는 이름: residence
+                ageGroup: ageGroupValue, 
+                gender: genderValue, 
+                residence: residenceValue 
             };
             
             if (isDemoMode || SCRIPT_URL === "" || SCRIPT_URL.includes("your-script-url")) { 
-                setTimeout(() => { alert(`[테스트 모드]\n${userName}님, ${centerName} 과정 신청이 완료되었습니다!`); closeModal(); document.getElementById('applyForm').reset(); btn.innerHTML = originalText; btn.disabled = false; }, 1000); return; 
+                setTimeout(() => { alert(`[테스트 모드]\n${userName}님, 신청이 완료되었습니다!`); closeModal(); document.getElementById('applyForm').reset(); btn.innerHTML = originalText; btn.disabled = false; }, 1000); return; 
             }
             
             fetch(SCRIPT_URL, { method: "POST", mode: "no-cors", headers: { "Content-Type": "application/json", }, body: JSON.stringify(formData), })
-            .then(() => { alert(`${userName}님, ${centerName} 과정 신청이 완료되었습니다!\n담당자가 확인 후 연락드리겠습니다.`); closeModal(); document.getElementById('applyForm').reset(); })
+            .then(() => { alert(`${userName}님, 신청이 완료되었습니다!\n담당자가 확인 후 연락드리겠습니다.`); closeModal(); document.getElementById('applyForm').reset(); })
             .catch(error => { console.error("Error:", error); alert("네트워크 오류가 발생했지만, 데이터가 전송되었을 수 있습니다.\n문제가 지속되면 문의처로 연락주세요."); })
             .finally(() => { btn.innerHTML = originalText; btn.disabled = false; });
         }
