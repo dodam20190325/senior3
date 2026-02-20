@@ -30,7 +30,7 @@
 <body class="antialiased selection:bg-teal-200 selection:text-teal-900">
 
     <!-- 헤더 -->
-    <header class="nature-header fixed w-full top-0 z-50 h-20 flex items-center justify-between px-4">
+    <header class="nature-header fixed w-full top-0 z-50 h-20 flex items-center justify-between px-4 border-b-2 border-teal-500">
         <div class="flex items-center gap-2 group cursor-pointer" onclick="window.scrollTo(0,0);">
             <span class="text-3xl transform group-hover:rotate-12 transition-transform duration-300">🍃</span>
             <h1 class="text-xl md:text-2xl font-black text-teal-900 tracking-tight">시니어 스마트 생활 교실</h1>
@@ -56,15 +56,16 @@
     <!-- 모바일 메뉴 -->
     <div id="mobile-menu" class="hidden fixed top-20 left-0 w-full bg-[#F0FDFA]/98 backdrop-blur-md z-40 border-b border-teal-200 shadow-xl lg:hidden">
         <nav class="flex flex-col p-6 space-y-4 text-center font-bold">
-            <a href="#home" class="text-teal-800">홈</a>
-            <a href="#about" class="text-teal-800">교육 소개</a>
-            <a href="#schedule" class="text-teal-800">일정표</a>
+            <a href="#home" class="text-teal-800 py-2 border-b border-teal-50">홈</a>
+            <a href="#about" class="text-teal-800 py-2 border-b border-teal-50">교육 소개</a>
+            <a href="#gallery" class="text-teal-800 py-2 border-b border-teal-50">작품 갤러리</a>
+            <a href="#schedule" class="text-teal-800 py-2 border-b border-teal-50">일정표</a>
             <a href="#apply" class="text-white bg-teal-600 py-3 rounded-2xl">수강 신청</a>
         </nav>
     </div>
 
     <main class="pt-28 pb-16">
-        <!-- 홈 -->
+        <!-- 홈 히어로 섹션 -->
         <section class="max-w-7xl mx-auto px-4 mb-24" id="home">
             <div class="bg-white rounded-[3rem] p-8 md:p-16 shadow-xl relative overflow-hidden flex flex-col-reverse md:flex-row items-center gap-12 border border-teal-50">
                 <div class="absolute top-0 left-0 w-full h-4 bg-gradient-to-r from-teal-400 to-emerald-500"></div>
@@ -73,23 +74,142 @@
                         <span class="w-2 h-2 bg-teal-500 rounded-full animate-pulse"></span>2026 부산시 지원사업
                     </span>
                     <h2 class="text-4xl md:text-6xl font-black mb-8 leading-tight text-slate-800">
-                        <span class="text-gradient-forest">인공지능(AI)</span>과 함께하는<br>품격 있는 스마트 라이프
+                        인공지능(AI)과 함께하는<br>품격 있는 스마트 라이프
                     </h2>
-                    <p class="text-lg md:text-xl text-slate-500 mb-12 leading-relaxed">복잡한 세상, AI가 당신의 든든한 길잡이가 됩니다.<br>기초부터 활용까지 쉽고 재미있게 시작해보세요.</p>
+                    <p class="text-lg md:text-xl text-slate-500 mb-12 leading-relaxed">
+                        복잡한 세상, AI가 당신의 든든한 길잡이가 됩니다.<br>
+                        기초부터 활용까지 쉽고 재미있게 시작해보세요.
+                    </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="#apply" class="px-10 py-4 bg-teal-600 text-white text-lg font-bold organic-shape hover:bg-teal-700 transition shadow-lg flex items-center justify-center gap-2">지금 신청하기 👉</a>
+                        <a href="#apply" class="px-10 py-4 bg-teal-600 text-white text-lg font-bold organic-shape hover:bg-teal-700 transition shadow-lg flex items-center justify-center gap-2 transform hover:scale-105 active:scale-95">
+                            지금 신청하기 👉
+                        </a>
+                        <a href="#schedule" class="px-10 py-4 bg-white text-teal-700 text-lg font-bold organic-shape border-2 border-teal-100 hover:border-teal-300 hover:bg-teal-50 transition flex items-center justify-center gap-2 transform hover:scale-105 active:scale-95">
+                            일정 확인하기 📅
+                        </a>
                     </div>
                 </div>
                 <div class="relative z-10 w-full md:w-2/5 flex justify-center">
                     <div class="bg-teal-50 p-8 rounded-[2.5rem] border border-teal-100 shadow-xl text-center transform hover:scale-105 transition duration-300 w-full max-w-sm">
                         <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://dodam20190325.github.io/senior3&color=115E59" class="w-48 h-48 md:w-56 md:h-56 bg-white p-4 rounded-3xl shadow-sm mx-auto mb-4" alt="QR">
-                        <h4 class="text-xl font-black text-teal-800">모바일 바로가기</h4>
+                        <h4 class="text-xl font-black text-teal-800 mb-1">모바일로 바로가기</h4>
+                        <p class="text-sm text-slate-500">스마트폰 카메라로 스캔하세요!</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- [수정] 통합 교육 일정표 (이미지 image_e16282.png 기반) -->
+        <!-- 교육 소개 -->
+        <section id="about" class="max-w-7xl mx-auto px-4 mb-32">
+            <div class="text-center mb-16">
+                <h3 class="text-3xl md:text-4xl font-black text-teal-900 mb-3">무엇을 배우나요?</h3>
+                <p class="text-lg text-slate-500">PC 기초부터 최신 AI 활용까지! (교육장별 과정 상이)</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="clean-card p-8 organic-shape-reverse hover:bg-teal-50/50 group transition">
+                    <div class="w-16 h-16 bg-teal-100 text-teal-600 rounded-2xl flex items-center justify-center text-3xl mb-6">💻</div>
+                    <h4 class="text-2xl font-bold mb-3 text-slate-800">PC 기초 및 디지털 생활 (3일 과정)</h4>
+                    <ul class="text-slate-600 leading-relaxed text-sm space-y-3">
+                        <li><strong>1일차: 컴퓨터와 친해지기</strong> - 전원 켜기/끄기, 마우스 및 키보드 사용법 익히기</li>
+                        <li><strong>2일차: 문서 만들기</strong> - 한글 타자 연습, 간단한 문서 작성 및 저장하기</li>
+                        <li><strong>3일차: 인터넷 & 민원24</strong> - 구글 계정 생성, 정보 검색, 정부24 민원 발급 실습</li>
+                    </ul>
+                </div>
+                <div class="clean-card p-8 organic-shape-reverse hover:bg-teal-50/50 group transition">
+                    <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl mb-6">🤖</div>
+                    <h4 class="text-2xl font-bold mb-3 text-slate-800">AI 활용 및 크리에이터 (3일 과정)</h4>
+                    <ul class="text-slate-600 leading-relaxed text-sm space-y-3">
+                        <li><strong>1일차: AI 아트 & 영상</strong> - 생성형 AI로 이미지 생성 및 영상 변환 실습</li>
+                        <li><strong>2일차: 브루(Vrew) 영상 제작</strong> - AI 자동 자막 생성 및 영상 편집 도구 활용</li>
+                        <li><strong>3일차: AI 크리에이터</strong> - 유튜브 채널 관리 및 나만의 영상 업로드 공유</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- 작품 갤러리 -->
+        <section id="gallery" class="max-w-7xl mx-auto px-4 mb-32">
+            <div class="bg-teal-800 rounded-[3rem] p-8 md:p-16 text-white shadow-2xl relative overflow-hidden border border-teal-700">
+                <div class="relative z-10 text-center mb-12">
+                    <span class="px-4 py-1.5 rounded-full bg-teal-900 border border-teal-700 text-teal-300 text-sm font-bold tracking-wide uppercase">Student Gallery</span>
+                    <h3 class="text-3xl md:text-4xl font-black mt-4 mb-4">수강생 작품 갤러리</h3>
+                    <p class="text-lg text-teal-200">수업 중에 직접 만든 작품을 실제 굿즈로 제작해 드립니다.</p>
+                </div>
+                <div class="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-3xl text-center group border border-white/10 hover:bg-white/20 transition duration-300 cursor-pointer">
+                        <div class="aspect-square bg-white rounded-2xl mb-4 overflow-hidden relative shadow-lg">
+                            <img src="머그컵사진.png" alt="머그컵" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.src='https://via.placeholder.com/300x300.png?text=Mug'">
+                        </div>
+                        <h5 class="font-bold text-white text-lg">나만의 머그컵</h5>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-3xl text-center group border border-white/10 hover:bg-white/20 transition duration-300 cursor-pointer">
+                        <div class="aspect-square bg-white rounded-2xl mb-4 overflow-hidden relative shadow-lg">
+                            <img src="에코백사진.png" alt="에코백" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.src='https://via.placeholder.com/300x300.png?text=Ecobag'">
+                        </div>
+                        <h5 class="font-bold text-white text-lg">에코백</h5>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-3xl text-center group border border-white/10 hover:bg-white/20 transition duration-300 cursor-pointer">
+                        <div class="aspect-square bg-white rounded-2xl mb-4 overflow-hidden relative shadow-lg">
+                            <img src="화강암사진.png" alt="석화타일" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.src='https://via.placeholder.com/300x300.png?text=Tile'">
+                        </div>
+                        <h5 class="font-bold text-white text-lg">석화 타일</h5>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur-sm p-4 rounded-3xl text-center group border border-white/10 hover:bg-white/20 transition duration-300 cursor-pointer">
+                        <div class="aspect-square bg-white rounded-2xl mb-4 overflow-hidden relative shadow-lg">
+                            <img src="키링사진.png" alt="키링" class="w-full h-full object-cover group-hover:scale-110 transition-transform" onerror="this.src='https://via.placeholder.com/300x300.png?text=Keyring'">
+                        </div>
+                        <h5 class="font-bold text-white text-lg">캐릭터 키링</h5>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 오시는 길 -->
+        <section id="directions" class="max-w-7xl mx-auto px-4 mb-32">
+            <div class="text-center mb-16">
+                <h3 class="text-3xl md:text-4xl font-black text-teal-900 mb-4">가까운 교육장 찾기</h3>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="clean-card p-6 flex items-start gap-6 organic-shape group hover:border-teal-400 cursor-pointer" onclick="openModal('거제3동 행정복지센터 2층 정보화교육장')">
+                    <div class="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center text-3xl">🏢</div>
+                    <div>
+                        <h4 class="font-bold text-xl text-slate-800 mb-1">거제3동 행정복지센터</h4>
+                        <p class="text-slate-500 mb-3 text-sm">부산광역시 연제구 거제대로 180 (2층)</p>
+                        <div class="inline-flex px-3 py-1 rounded-full bg-teal-50 text-[0.7rem] font-bold text-teal-700 uppercase">거제해맞이역 / 거제역</div>
+                    </div>
+                    <button class="ml-auto px-4 py-2 bg-slate-800 text-white text-sm font-bold rounded-lg hover:bg-teal-600 transition self-center">신청</button>
+                </div>
+                <div class="clean-card p-6 flex items-start gap-6 organic-shape group hover:border-teal-400 cursor-pointer" onclick="openModal('부산유라시아플랫폼 112호')">
+                    <div class="w-16 h-16 rounded-full bg-teal-100 flex items-center justify-center text-3xl">🚆</div>
+                    <div>
+                        <h4 class="font-bold text-xl text-slate-800 mb-1">부산유라시아플랫폼</h4>
+                        <p class="text-slate-500 mb-3 text-sm">부산광역시 동구 중앙대로 210 (112호)</p>
+                        <div class="inline-flex px-3 py-1 rounded-full bg-teal-50 text-[0.7rem] font-bold text-teal-700 uppercase">1호선 부산역 광장</div>
+                    </div>
+                    <button class="ml-auto px-4 py-2 bg-slate-800 text-white text-sm font-bold rounded-lg hover:bg-teal-600 transition self-center">신청</button>
+                </div>
+                <div class="clean-card p-6 flex items-start gap-6 organic-shape group hover:border-emerald-400 cursor-pointer" onclick="openModal('북구청 제2별관 정보화교육장')">
+                    <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center text-3xl">🏛️</div>
+                    <div>
+                        <h4 class="font-bold text-xl text-slate-800 mb-1">북구청 제2별관 정보화교육장</h4>
+                        <p class="text-slate-500 mb-3 text-sm">부산광역시 북구 낙동대로 1570번길 33</p>
+                        <div class="inline-flex px-3 py-1 rounded-full bg-emerald-50 text-[0.7rem] font-bold text-emerald-700 uppercase">2호선 구명역 1번 출구</div>
+                    </div>
+                    <button class="ml-auto px-4 py-2 bg-slate-800 text-white text-sm font-bold rounded-lg hover:bg-emerald-600 transition self-center">신청</button>
+                </div>
+                <div class="clean-card p-6 flex items-start gap-6 organic-shape group hover:border-emerald-400 cursor-pointer" onclick="openModal('부산도서관 2층 소담방5')">
+                    <div class="w-16 h-16 rounded-full bg-emerald-100 flex items-center justify-center text-3xl">📖</div>
+                    <div>
+                        <h4 class="font-bold text-xl text-slate-800 mb-1">부산도서관 2층 소담방</h4>
+                        <p class="text-slate-500 mb-3 text-sm">부산광역시 사상구 사상로 310번길 33</p>
+                        <div class="inline-flex px-3 py-1 rounded-full bg-emerald-50 text-[0.7rem] font-bold text-emerald-700 uppercase">2호선 덕포역 2번 출구</div>
+                    </div>
+                    <button class="ml-auto px-4 py-2 bg-slate-800 text-white text-sm font-bold rounded-lg hover:bg-emerald-600 transition self-center">신청</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 통합 교육 일정표 -->
         <section id="schedule" class="max-w-7xl mx-auto px-4 mb-32">
             <div class="clean-card overflow-hidden organic-shape-reverse border-none">
                 <div class="p-8 bg-teal-700 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -115,81 +235,23 @@
                             </tr>
                         </thead>
                         <tbody class="text-sm font-medium text-slate-600 bg-white">
-                            <tr>
-                                <td class="p-5 text-center font-bold text-slate-400 border-r">2월</td>
-                                <td class="p-5 border-r">02.23 ~ 02.28</td>
-                                <td class="p-5 bg-teal-50/50 text-teal-700 font-bold border-r">제1기 (월수금)<br><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-teal-100 text-[10px] rounded mt-1">💻 PC 기초</span></td>
-                                <td class="p-5 bg-teal-50/50 border-r">제1기 (월수금)</td>
-                                <td class="p-5 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 text-center text-slate-300">-</td>
-                            </tr>
-                            <tr>
-                                <td rowspan="5" class="p-5 text-center font-bold text-slate-800 border-t border-slate-200 border-r">3월</td>
-                                <td class="p-5 border-t border-slate-200 border-r">03.02 ~ 03.07</td>
-                                <td class="p-5 border-t bg-teal-50/50 text-teal-700 font-bold border-r">제2기 (화수금)<br><span class="text-[10px] text-red-500 block">*공휴일 대체</span><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-teal-100 text-[10px] rounded mt-1">💻 PC 기초</span></td>
-                                <td class="p-5 border-t bg-teal-50/50 border-r">제2기 (화수금)</td>
-                                <td class="p-5 border-t border-slate-200 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 border-t border-slate-200 text-center text-slate-300">-</td>
-                            </tr>
-                            <tr>
-                                <td class="p-5 border-r">03.09 ~ 03.14</td>
-                                <td class="p-5 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 font-bold text-slate-800 border-r">제1기 (월수금)</td>
-                                <td class="p-5 font-bold text-slate-800">제1기 (화수금)</td>
-                            </tr>
-                            <tr>
-                                <td class="p-5 border-r">03.16 ~ 03.21</td>
-                                <td class="p-5 bg-teal-50/50 text-teal-700 font-bold border-r">제3기 (월수금)<br><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] rounded mt-1">🤖 AI 활용</span></td>
-                                <td class="p-5 bg-teal-50/50 border-r">제3기 (월수금)</td>
-                                <td class="p-5 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 text-center text-slate-300">-</td>
-                            </tr>
-                            <tr>
-                                <td class="p-5 border-r">03.23 ~ 03.28</td>
-                                <td class="p-5 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 font-bold text-slate-800 border-r">제2기 (월수금)</td>
-                                <td class="p-5 font-bold text-slate-800">제2기 (화수금)</td>
-                            </tr>
-                            <tr>
-                                <td class="p-5 border-r">03.30 ~ 04.04</td>
-                                <td class="p-5 bg-teal-50/50 text-teal-700 font-bold border-r">제4기 (월수금)<br><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] rounded mt-1">🤖 AI 활용</span></td>
-                                <td class="p-5 bg-teal-50/50 border-r">제4기 (월수금)</td>
-                                <td class="p-5 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 text-center text-slate-300">-</td>
-                            </tr>
-                            <tr>
-                                <td rowspan="3" class="p-5 text-center font-bold text-slate-800 border-t border-slate-200 border-r">4월</td>
-                                <td class="p-5 border-t border-slate-200 border-r">04.06 ~ 04.11</td>
-                                <td class="p-5 border-t bg-teal-50/50 text-teal-700 font-bold border-r">제5기 (월수금)<br><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] rounded mt-1">🤖 AI 활용</span></td>
-                                <td class="p-5 border-t bg-teal-50/50 border-r">제5기 (월수금)</td>
-                                <td class="p-5 border-t border-slate-200 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 border-t border-slate-200 text-center text-slate-300">-</td>
-                            </tr>
-                            <tr>
-                                <td class="p-5 border-r">04.13 ~ 04.18</td>
-                                <td class="p-5 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 font-bold text-slate-800 border-r">제3기 (월수금)</td>
-                                <td class="p-5 font-bold text-slate-800">제3기 (화수금)</td>
-                            </tr>
-                            <tr>
-                                <td class="p-5 border-r">04.20 ~ 04.25</td>
-                                <td class="p-5 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 text-center text-slate-300 border-r">-</td>
-                                <td class="p-5 font-bold text-slate-800 border-r">제4기 (월수금)</td>
-                                <td class="p-5 font-bold text-slate-800">제4기 (화수금)</td>
-                            </tr>
+                            <tr><td class="p-5 text-center font-bold text-slate-400 border-r">2월</td><td class="p-5 border-r">02.23 ~ 02.28</td><td class="p-5 bg-teal-50/50 text-teal-700 font-bold border-r">제1기 (월수금)<br><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-teal-100 text-[10px] rounded mt-1">💻 PC 기초</span></td><td class="p-5 bg-teal-50/50 border-r">제1기 (월수금)</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300">-</td></tr>
+                            <tr><td rowspan="5" class="p-5 text-center font-bold text-slate-800 border-t border-slate-200 border-r">3월</td><td class="p-5 border-t border-slate-200 border-r">03.02 ~ 03.07</td><td class="p-5 border-t bg-teal-50/50 text-teal-700 font-bold border-r">제2기 (화수금)<br><span class="text-[10px] text-red-500 block">*공휴일 대체</span><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-teal-100 text-[10px] rounded mt-1">💻 PC 기초</span></td><td class="p-5 border-t bg-teal-50/50 border-r">제2기 (화수금)</td><td class="p-5 border-t border-slate-200 text-center text-slate-300 border-r">-</td><td class="p-5 border-t border-slate-200 text-center text-slate-300">-</td></tr>
+                            <tr><td class="p-5 border-r">03.09 ~ 03.14</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 font-bold text-slate-800 border-r">제1기 (월수금)</td><td class="p-5 font-bold text-slate-800">제1기 (화수금)</td></tr>
+                            <tr><td class="p-5 border-r">03.16 ~ 03.21</td><td class="p-5 bg-teal-50/50 text-teal-700 font-bold border-r">제3기 (월수금)<br><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] rounded mt-1">🤖 AI 활용</span></td><td class="p-5 bg-teal-50/50 border-r">제3기 (월수금)</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300">-</td></tr>
+                            <tr><td class="p-5 border-r">03.23 ~ 03.28</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 font-bold text-slate-800 border-r">제2기 (월수금)</td><td class="p-5 font-bold text-slate-800">제2기 (화수금)</td></tr>
+                            <tr><td class="p-5 border-r">03.30 ~ 04.04</td><td class="p-5 bg-teal-50/50 text-teal-700 font-bold border-r">제4기 (월수금)<br><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] rounded mt-1">🤖 AI 활용</span></td><td class="p-5 bg-teal-50/50 border-r">제4기 (월수금)</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300">-</td></tr>
+                            <tr><td rowspan="3" class="p-5 text-center font-bold text-slate-800 border-t border-slate-200 border-r">4월</td><td class="p-5 border-t border-slate-200 border-r">04.06 ~ 04.11</td><td class="p-5 border-t bg-teal-50/50 text-teal-700 font-bold border-r">제5기 (월수금)<br><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] rounded mt-1">🤖 AI 활용</span></td><td class="p-5 border-t bg-teal-50/50 border-r">제5기 (월수금)</td><td class="p-5 border-t border-slate-200 text-center text-slate-300 border-r">-</td><td class="p-5 border-t border-slate-200 text-center text-slate-300">-</td></tr>
+                            <tr><td class="p-5 border-r">04.13 ~ 04.18</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 font-bold text-slate-800 border-r">제3기 (월수금)</td><td class="p-5 font-bold text-slate-800">제3기 (화수금)</td></tr>
+                            <tr><td class="p-5 border-r">04.20 ~ 04.25</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 font-bold text-slate-800 border-r">제4기 (월수금)</td><td class="p-5 font-bold text-slate-800">제4기 (화수금)</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
 
-        <!-- [수정] 상세 교육 계획서 (이미지 image_e16a98.png 기반) -->
+        <!-- 상세 교육 계획서 -->
         <section id="plan" class="max-w-7xl mx-auto px-4 mb-32">
-            <!-- 거제3동 & 유라시아 -->
             <div class="clean-card overflow-hidden organic-shape border-none mb-12">
                 <div class="p-8 bg-teal-700 text-white flex justify-between items-center flex-wrap gap-4">
                     <div>
@@ -246,7 +308,6 @@
                 </div>
             </div>
 
-            <!-- 북구청 & 부산도서관 -->
             <div class="clean-card overflow-hidden organic-shape border-none">
                 <div class="p-8 bg-emerald-700 text-white flex justify-between items-center flex-wrap gap-4">
                     <div>
@@ -288,39 +349,35 @@
             </div>
         </section>
 
-        <!-- [수정] 수강 신청 장소 선택 (이미지 image_e16dde.png 기반) -->
+        <!-- 수강 신청 섹션 -->
         <section id="apply" class="max-w-7xl mx-auto px-4 mb-32 py-24">
             <div class="text-center mb-16">
                 <span class="inline-block py-2 px-6 rounded-full bg-teal-600 text-white text-sm font-bold mb-6 shadow-lg shadow-teal-500/30">수강 신청</span>
-                <h3 class="text-3xl md:text-4xl font-black text-teal-900 mb-4">교육 장소 선택하기</h3>
+                <h3 class="text-3xl md:text-4xl font-black text-teal-900 mb-4 font-black">교육 장소 선택하기</h3>
                 <p class="text-lg text-slate-500">원하시는 교육장을 선택하시면 신청서가 열립니다.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- 1. 거제3동 -->
-                <div class="clean-card p-8 flex flex-col items-center text-center organic-shape group cursor-pointer" onclick="openModal('거제3동 행정복지센터 2층 정보화교육장')">
-                    <div class="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner group-hover:bg-teal-100 transition">🏢</div>
+                <div class="clean-card p-8 flex flex-col items-center text-center organic-shape group cursor-pointer hover:border-teal-400 transition" onclick="openModal('거제3동 행정복지센터 2층 정보화교육장')">
+                    <div class="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner group-hover:bg-teal-100 transition duration-300">🏢</div>
                     <h4 class="text-xl font-bold text-slate-800 mb-2">거제3동 행정복지센터</h4>
                     <p class="text-sm text-slate-500 mb-8 font-medium">2층 정보화교육장</p>
                     <button class="w-full py-3 rounded-xl bg-teal-50 text-teal-700 font-bold hover:bg-teal-600 hover:text-white transition shadow-sm">신청하기</button>
                 </div>
-                <!-- 2. 부산유라시아플랫폼 -->
-                <div class="clean-card p-8 flex flex-col items-center text-center organic-shape group cursor-pointer" onclick="openModal('부산유라시아플랫폼 112호')">
-                    <div class="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner group-hover:bg-teal-100 transition">🚆</div>
+                <div class="clean-card p-8 flex flex-col items-center text-center organic-shape group cursor-pointer hover:border-teal-400 transition" onclick="openModal('부산유라시아플랫폼 112호')">
+                    <div class="w-16 h-16 bg-teal-50 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner group-hover:bg-teal-100 transition duration-300">🚆</div>
                     <h4 class="text-xl font-bold text-slate-800 mb-2">부산유라시아플랫폼</h4>
                     <p class="text-sm text-slate-500 mb-8 font-medium">112호</p>
                     <button class="w-full py-3 rounded-xl bg-teal-50 text-teal-700 font-bold hover:bg-teal-600 hover:text-white transition shadow-sm">신청하기</button>
                 </div>
-                <!-- 3. 북구청 제2별관 -->
-                <div class="clean-card p-8 flex flex-col items-center text-center organic-shape group cursor-pointer" onclick="openModal('북구청 제2별관 정보화교육장')">
-                    <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner group-hover:bg-emerald-100 transition">🏛️</div>
+                <div class="clean-card p-8 flex flex-col items-center text-center organic-shape group cursor-pointer hover:border-emerald-400 transition" onclick="openModal('북구청 제2별관 정보화교육장')">
+                    <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner group-hover:bg-emerald-100 transition duration-300">🏛️</div>
                     <h4 class="text-xl font-bold text-slate-800 mb-2">북구청 제2별관</h4>
                     <p class="text-sm text-slate-500 mb-8 font-medium">정보화교육장</p>
                     <button class="w-full py-3 rounded-xl bg-emerald-50 text-emerald-700 font-bold hover:bg-emerald-600 hover:text-white transition shadow-sm">신청하기</button>
                 </div>
-                <!-- 4. 부산도서관 -->
-                <div class="clean-card p-8 flex flex-col items-center text-center organic-shape group cursor-pointer" onclick="openModal('부산도서관 2층 소담방5')">
-                    <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner group-hover:bg-emerald-100 transition">📖</div>
+                <div class="clean-card p-8 flex flex-col items-center text-center organic-shape group cursor-pointer hover:border-emerald-400 transition" onclick="openModal('부산도서관 2층 소담방5')">
+                    <div class="w-16 h-16 bg-emerald-50 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-inner group-hover:bg-emerald-100 transition duration-300">📖</div>
                     <h4 class="text-xl font-bold text-slate-800 mb-2">부산도서관</h4>
                     <p class="text-sm text-slate-500 mb-8 font-medium">2층 소담방5</p>
                     <button class="w-full py-3 rounded-xl bg-emerald-50 text-emerald-700 font-bold hover:bg-emerald-600 hover:text-white transition shadow-sm">신청하기</button>
@@ -328,69 +385,77 @@
             </div>
         </section>
 
-        <!-- [수정] 푸터 (이미지 image_e16dde.png 기반) -->
+        <!-- 푸터 -->
         <footer class="max-w-7xl mx-auto px-4 mt-24 pt-12 pb-12 border-t border-teal-200 text-center">
-            <h4 class="text-xl font-bold text-teal-900 mb-8">2026 시니어 스마트 생활 교실 운영사무국</h4>
-            <div class="flex justify-center mb-8">
-                <div class="inline-flex items-center gap-4 px-8 py-4 bg-white border border-teal-100 rounded-3xl shadow-md">
-                    <span class="text-2xl">📞</span>
-                    <a href="tel:051-636-0325" class="text-lg font-bold text-slate-700 hover:text-teal-600 transition">051-636-0325</a>
+            <h4 class="text-2xl font-black text-teal-900 mb-12 uppercase tracking-tight">2026 시니어 스마트 생활 교실 운영사무국</h4>
+            <div class="flex justify-center mb-12">
+                <div class="inline-flex items-center gap-6 px-12 py-6 bg-white border border-teal-100 rounded-[2rem] shadow-xl hover:shadow-2xl transition duration-300">
+                    <div class="w-12 h-12 bg-rose-50 rounded-full flex items-center justify-center text-2xl">📞</div>
+                    <a href="tel:051-636-0325" class="text-2xl font-black text-slate-700 hover:text-teal-600 transition">051-636-0325</a>
                 </div>
             </div>
             <div class="mb-12">
-                <button onclick="openQrModal()" class="inline-flex items-center gap-2 text-teal-700 font-bold hover:underline">
+                <button onclick="openQrModal()" class="inline-flex items-center gap-2 text-teal-700 font-bold hover:underline py-2 px-4 bg-teal-50 rounded-xl transition">
                     <span class="text-xl">📱</span> 모바일로 보기 (QR코드)
                 </button>
             </div>
-            <p class="text-sm text-slate-400">© 2026 Busan Smart Senior Program. All rights reserved.</p>
+            <p class="text-sm text-slate-400 font-medium tracking-wide uppercase">© 2026 Busan Smart Senior Program. All rights reserved.</p>
         </footer>
     </main>
 
-    <!-- 신청 양식 팝업 (모달) -->
+    <!-- 신청 양식 모달 (핵심 수정됨) -->
     <div id="applicationModal" class="modal-overlay">
         <div class="modal-content">
             <div class="bg-teal-700 p-6 flex justify-between items-center sticky top-0 z-10 shrink-0">
-                <h3 class="text-2xl font-bold text-white">수강 신청하기</h3>
-                <button onclick="closeModal()" class="text-teal-200 hover:text-white transition p-2">✕</button>
+                <div>
+                    <h3 class="text-2xl font-bold text-white">수강 신청하기</h3>
+                    <p class="text-teal-100 text-sm mt-1">원하시는 기수를 모두 선택해주세요.</p>
+                </div>
+                <button onclick="closeModal()" class="text-teal-200 hover:text-white transition p-2 bg-teal-800 rounded-full">✕</button>
             </div>
             <div class="p-8 overflow-y-auto max-h-[70vh]">
                 <form id="applyForm" onsubmit="submitToGoogleSheet(event)">
-                    <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">신청 교육장</label><input type="text" id="selectedCenter" name="center" class="w-full p-4 bg-teal-50 rounded-2xl text-slate-800 font-bold border-none outline-none" readonly></div>
-                    <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">신청 기수 (중복 선택 가능)</label><div id="termContainer" class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200"></div></div>
-                    <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">성함</label><input type="text" id="userName" name="name" required placeholder="예: 홍길동" class="w-full p-4 border-2 border-teal-100 rounded-2xl focus:border-teal-500 outline-none"></div>
-                    <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">연락처</label><input type="tel" id="userPhone" name="phone" required placeholder="01012345678" maxlength="13" oninput="autoHyphen(this)" class="w-full p-4 border-2 border-teal-100 rounded-2xl focus:border-teal-500 outline-none"></div>
+                    <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">신청 교육장</label><input type="text" id="selectedCenter" name="center" class="w-full p-4 bg-teal-50 rounded-2xl text-slate-800 font-bold border-none outline-none text-lg" readonly></div>
+                    
+                    <!-- [수정] 기수별 날짜, 요일, 시간 상세 표시 -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-bold text-slate-700 mb-2">신청 기수 (중복 선택 가능)</label>
+                        <div id="termContainer" class="space-y-3 bg-slate-50 p-4 rounded-xl border border-slate-200"></div>
+                    </div>
+
+                    <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">성함</label><input type="text" id="userName" name="name" required placeholder="예: 홍길동" class="w-full p-4 border-2 border-teal-100 rounded-2xl focus:border-teal-500 focus:ring-4 focus:ring-teal-100 outline-none transition text-lg"></div>
+                    <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">연락처</label><input type="tel" id="userPhone" name="phone" required placeholder="예: 01012345678" maxlength="13" oninput="autoHyphen(this)" class="w-full p-4 border-2 border-teal-100 rounded-2xl focus:border-teal-500 focus:ring-4 focus:ring-teal-100 outline-none transition text-lg"></div>
                     
                     <div class="mb-6"><label class="block text-sm font-bold text-slate-700 mb-2">성별</label>
                         <div class="grid grid-cols-2 gap-3">
-                            <label class="cursor-pointer"><input type="radio" name="gender" value="남" class="peer sr-only" required><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 peer-checked:bg-teal-50 font-bold transition">남성</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="gender" value="여" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 peer-checked:bg-teal-50 font-bold transition">여성</div></label>
+                            <label class="cursor-pointer group"><input type="radio" name="gender" value="남" class="peer sr-only" required><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 peer-checked:bg-teal-50 font-bold transition">남성</div></label>
+                            <label class="cursor-pointer group"><input type="radio" name="gender" value="여" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 peer-checked:bg-teal-50 font-bold transition">여성</div></label>
                         </div>
                     </div>
                     
                     <div class="mb-8"><label class="block text-sm font-bold text-slate-700 mb-2">연령대</label>
                         <div class="grid grid-cols-3 gap-3">
-                            <label class="cursor-pointer"><input type="radio" name="ageGroup" value="50대" class="peer sr-only" required><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 font-bold transition">50대</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="ageGroup" value="60대" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 font-bold transition">60대</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="ageGroup" value="70대+" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 font-bold transition">70대+</div></label>
+                            <label class="cursor-pointer group"><input type="radio" name="ageGroup" value="50대" class="peer sr-only" required><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 font-bold transition">50대</div></label>
+                            <label class="cursor-pointer group"><input type="radio" name="ageGroup" value="60대" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 font-bold transition">60대</div></label>
+                            <label class="cursor-pointer group"><input type="radio" name="ageGroup" value="70대+" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 font-bold transition">70대+</div></label>
                         </div>
                     </div>
 
                     <div id="residenceContainer" class="mb-8 hidden"><label class="block text-sm font-bold text-slate-700 mb-2">거주지</label>
                         <div class="grid grid-cols-2 gap-3">
-                            <label class="cursor-pointer"><input type="radio" name="residence" id="resLocal" value="local" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 font-bold transition" id="labelLocal">해당 구 거주</div></label>
-                            <label class="cursor-pointer"><input type="radio" name="residence" value="other" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 font-bold transition">그 외 지역</div></label>
+                            <label class="cursor-pointer group"><input type="radio" name="residence" id="resLocal" value="local" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 font-bold transition" id="labelLocal">해당 구 거주</div></label>
+                            <label class="cursor-pointer group"><input type="radio" name="residence" value="other" class="peer sr-only"><div class="w-full p-3 border-2 border-teal-100 rounded-xl text-center peer-checked:border-teal-600 font-bold transition">그 외 지역</div></label>
                         </div>
                     </div>
 
-                    <!-- 개인정보 동의 섹션 -->
                     <div class="mb-8 p-5 bg-teal-50/50 rounded-2xl border border-teal-100">
                         <label class="block text-sm font-bold text-teal-900 mb-3">개인정보 수집 및 이용 동의 (필수)</label>
                         <div class="text-[0.7rem] text-slate-600 mb-4 bg-white p-3 rounded-lg leading-relaxed max-h-24 border border-slate-100 overflow-y-auto">
                             1. 수집 항목: 성함, 연락처, 성별, 연령대, 거주지역<br>2. 수집 목적: 수강생 선정, 교육 안내, 학사 관리<br>3. 보유 기간: 2026년 교육 종료 시까지
                         </div>
                         <label class="flex items-center gap-3 cursor-pointer group">
-                            <input type="checkbox" id="privacyAgree" required class="w-6 h-6 text-teal-600 rounded focus:ring-teal-500 border-gray-300">
-                            <span class="text-sm font-bold text-teal-800">위 내용을 확인하였으며 동의합니다.</span>
+                            <input type="checkbox" id="privacyAgree" required class="w-6 h-6 text-teal-600 rounded focus:ring-teal-500 border-gray-300 transform scale-110">
+                            <span class="text-sm font-bold text-teal-800 transition group-hover:text-teal-600">위 내용을 확인하였으며 동의합니다.</span>
                         </label>
                     </div>
 
@@ -400,12 +465,12 @@
         </div>
     </div>
 
-    <!-- QR코드 팝업 -->
+    <!-- QR코드 모달 -->
     <div id="qrModal" class="modal-overlay" onclick="closeQrModal()">
         <div class="modal-content p-8 text-center max-w-sm" onclick="event.stopPropagation()">
-            <h3 class="text-xl font-bold mb-4">QR코드로 공유하기</h3>
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://dodam20190325.github.io/senior3&color=115E59" class="mx-auto mb-4 border-2 border-teal-100 p-2 rounded-xl" alt="QR">
-            <button onclick="closeQrModal()" class="mt-6 px-6 py-2 bg-slate-100 rounded-lg font-bold hover:bg-slate-200 transition">닫기</button>
+            <h3 class="text-xl font-bold mb-4 text-slate-800">QR코드로 공유하기</h3>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://dodam20190325.github.io/senior3&color=115E59" class="mx-auto mb-4 border-2 border-teal-100 p-2 rounded-xl shadow-sm" alt="QR">
+            <button onclick="closeQrModal()" class="px-8 py-2 bg-slate-100 rounded-xl font-bold text-slate-600 hover:bg-slate-200 transition">닫기</button>
         </div>
     </div>
 
@@ -428,28 +493,48 @@
             termContainer.innerHTML = '';
 
             let terms = [];
-            if(centerName.includes('거제') || centerName.includes('유라시아')) {
+            // [복구] 각 교육장별 상세 시간, 날짜 정보 반영
+            if(centerName.includes('거제3동')) {
                 terms = [
-                    {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28)'},
-                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07)'},
-                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21)'},
-                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04)'},
-                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11)'}
+                    {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28 월수금 09:30~11:30)'},
+                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07 화수금 09:30~11:30)'},
+                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21 월수금 09:30~11:30)'},
+                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04 월수금 09:30~11:30)'},
+                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11 월수금 09:30~11:30)'}
                 ];
-            } else {
-                // 북구청, 부산도서관
+            } else if(centerName.includes('유라시아')) {
                 terms = [
-                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14)'},
-                    {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28)'},
-                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18)'},
-                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25)'}
+                    {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28 월수금 14:00~16:00)'},
+                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07 화수금 14:00~16:00)'},
+                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21 월수금 14:00~16:00)'},
+                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04 월수금 14:00~16:00)'},
+                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11 월수금 14:00~16:00)'}
+                ];
+            } else if(centerName.includes('북구청')) {
+                terms = [
+                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14 월수금 10:00~12:00)'},
+                    {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28 월수금 10:00~12:00)'},
+                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18 월수금 10:00~12:00)'},
+                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25 월수금 10:00~12:00)'}
+                ];
+            } else if(centerName.includes('부산도서관')) {
+                terms = [
+                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14 화수금 14:00~16:00)'},
+                    {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28 화수금 14:00~16:00)'},
+                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18 화수금 14:00~16:00)'},
+                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25 화수금 14:00~16:00)'}
                 ];
             }
 
             terms.forEach((t, i) => {
                 const div = document.createElement('div');
-                div.className = "flex items-center gap-2";
-                div.innerHTML = `<input type="checkbox" id="term_${i}" name="term" value="${t.val}" class="w-5 h-5 text-teal-600 rounded"><label for="term_${i}" class="text-sm font-medium cursor-pointer">${t.label}</label>`;
+                div.className = "flex items-start gap-2 group";
+                div.innerHTML = `
+                    <div class="flex items-center h-5 mt-0.5">
+                        <input type="checkbox" id="term_${i}" name="term" value="${t.val}" class="w-5 h-5 text-teal-600 rounded focus:ring-teal-500 border-gray-300 cursor-pointer">
+                    </div>
+                    <label for="term_${i}" class="text-[0.85rem] font-medium cursor-pointer text-slate-700 group-hover:text-teal-700 leading-snug">${t.label}</label>
+                `;
                 termContainer.appendChild(div);
             });
 
@@ -465,10 +550,17 @@
         function submitToGoogleSheet(e) {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            const checkedTerms = Array.from(document.querySelectorAll('input[name="term"]:checked')).map(c => c.value);
-            const privacyAgree = document.getElementById('privacyAgree').checked;
+            const checkedTermsNodes = document.querySelectorAll('input[name="term"]:checked');
             
-            if(checkedTerms.length === 0) { alert("신청하실 기수를 하나 이상 선택해주세요."); return; }
+            if(checkedTermsNodes.length === 0) { alert("신청하실 기수를 하나 이상 선택해주세요."); return; }
+            
+            // 라벨에서 텍스트를 통째로 가져와야 시트에서 날짜/시간을 확인할 수 있습니다.
+            const checkedTerms = Array.from(checkedTermsNodes).map(node => {
+                const label = document.querySelector(`label[for="${node.id}"]`);
+                return label ? label.innerText : node.value;
+            });
+
+            const privacyAgree = document.getElementById('privacyAgree').checked;
             if(!privacyAgree) { alert("개인정보 수집 및 이용에 동의하셔야 신청이 가능합니다."); return; }
 
             const resBox = document.getElementById('residenceContainer');
@@ -484,7 +576,7 @@
 
             const formData = {
                 center: document.getElementById('selectedCenter').value,
-                terms: checkedTerms.join(', '),
+                terms: checkedTerms.join(' / '),
                 name: document.getElementById('userName').value,
                 phone: document.getElementById('userPhone').value,
                 ageGroup: document.querySelector('input[name="ageGroup"]:checked').value,
@@ -500,7 +592,7 @@
                 body: JSON.stringify(formData)
             })
             .then(() => {
-                alert(formData.name + "님, 신청이 완료되었습니다!\n담당자가 확인 후 교육 전주 금요일에 문자 드리겠습니다.");
+                alert(formData.name + "님, 신청이 완료되었습니다!\n담당자가 확인 후 교육 전주 금요일에 개별 연락 드리겠습니다.");
                 closeModal();
                 document.getElementById('applyForm').reset();
             })
