@@ -129,7 +129,7 @@
 
         <!-- 작품 갤러리 -->
         <section id="gallery" class="max-w-7xl mx-auto px-4 mb-32">
-            <div class="bg-teal-800 rounded-[3rem] p-8 md:p-16 text-white shadow-2xl relative overflow-hidden border border-teal-700">
+            <div class="bg-teal-600 rounded-[3rem] p-8 md:p-16 text-white shadow-2xl relative overflow-hidden border border-teal-700">
                 <div class="relative z-10 text-center mb-12">
                     <span class="px-4 py-1.5 rounded-full bg-teal-900 border border-teal-700 text-teal-300 text-sm font-bold tracking-wide uppercase">Student Gallery</span>
                     <h3 class="text-3xl md:text-4xl font-black mt-4 mb-4">수강생 작품 갤러리</h3>
@@ -496,29 +496,29 @@
             if(centerName.includes('거제3동')) {
                 terms = [
                     {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28 월수금 09:30~11:30)', isClosed: true},
-                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07 화수금 09:30~11:30)', isClosed: false},
-                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21 월수금 09:30~11:30)', isClosed: false},
-                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04 월수금 09:30~11:30)', isClosed: false},
-                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11 월수금 09:30~11:30)', isClosed: false}
+                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07 화수금 09:30~11:30)', isClosed: true},
+                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21 월수금 09:30~11:30)', isClosed: true},
+                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04 월수금 09:30~11:30)', isClosed: true},
+                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11 월수금 09:30~11:30)', isClosed: true}
                 ];
             } else if(centerName.includes('유라시아')) {
                 terms = [
                     {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28 월수금 14:00~16:00)', isClosed: true},
-                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07 화수금 14:00~16:00)', isClosed: false},
-                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21 월수금 14:00~16:00)', isClosed: false},
-                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04 월수금 14:00~16:00)', isClosed: false},
-                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11 월수금 14:00~16:00)', isClosed: false}
+                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07 화수금 14:00~16:00)', isClosed: true},
+                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21 월수금 14:00~16:00)', isClosed: true},
+                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04 월수금 14:00~16:00)', isClosed: true},
+                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11 월수금 14:00~16:00)', isClosed: true}
                 ];
             } else if(centerName.includes('북구청')) {
                 terms = [
                     {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14 월수금 10:00~12:00)', isClosed: true},
                     {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28 월수금 10:00~12:00)', isClosed: true},
-                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18 월수금 10:00~12:00)', isClosed: false},
-                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25 월수금 10:00~12:00)', isClosed: false}
+                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18 월수금 10:00~12:00)', isClosed: true},
+                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25 월수금 10:00~12:00)', isClosed: true}
                 ];
             } else if(centerName.includes('부산도서관')) {
                 terms = [
-                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14 화수금 14:00~16:00)', isClosed: false},
+                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14 화수금 14:00~16:00)', isClosed: true},
                     {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28 화수금 14:00~16:00)', isClosed: false},
                     {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18 화수금 14:00~16:00)', isClosed: false},
                     {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25 화수금 14:00~16:00)', isClosed: false}
@@ -608,6 +608,7 @@
     </script>
 </body>
 </html>
+
 
 
 
