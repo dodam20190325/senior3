@@ -535,9 +535,9 @@
                 div.className = `flex items-center p-3 rounded-xl transition ${t.isClosed ? 'bg-gray-100 opacity-60' : 'bg-white border border-slate-200 hover:border-teal-400'}`;
                 
                 div.innerHTML = `
-                    <input type="checkbox" id="term_${i}" name="term" value="${t.val}" ${t.isClosed ? 'disabled' : ''} class="w-5 h-5 text-teal-600 rounded">
-                    <label for="term_${i}" class="ml-3 text-base font-bold ${t.isClosed ? 'line-through text-slate-400' : 'text-slate-700 cursor-pointer'}">
-                        ${t.label} ${t.isClosed ? '<span class="text-red-500 font-bold">[마감]</span>' : ''}
+                    <input type="checkbox" id="term_${i}" name="term" value="${t.val}" ${t.isClosed ? 'disabled' : ''} class="w-6 h-6 text-teal-600 rounded">
+                    <label for="term_${i}" class="ml-4 text-base font-bold ${t.isClosed ? 'line-through text-slate-400' : 'text-slate-700 cursor-pointer'}">
+                        ${t.label} ${t.isClosed ? '<span class="text-red-500 font-black ml-2">[마감됨]</span>' : ''}
                     </label>
                 `;
                 termContainer.appendChild(div);
@@ -613,6 +613,7 @@
     </script>
 </body>
 </html>
+
 
 
 
