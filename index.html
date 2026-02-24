@@ -530,14 +530,15 @@
                 ];
             }
 
-            terms.forEach((t, i) => {
+           terms.forEach((t, i) => {
                 const div = document.createElement('div');
-                div.className = "flex items-start gap-2 group";
+                div.className = `flex items-center p-3 rounded-xl transition ${t.isClosed ? 'bg-gray-100 opacity-60' : 'bg-white border border-slate-200 hover:border-teal-400'}`;
+                
                 div.innerHTML = `
-                    <div class="flex items-center h-5 mt-0.5">
-                        <input type="checkbox" id="term_${i}" name="term" value="${t.val}" class="w-5 h-5 text-teal-600 rounded focus:ring-teal-500 border-gray-300 cursor-pointer">
-                    </div>
-                    <label for="term_${i}" class="text-[0.85rem] font-medium cursor-pointer text-slate-700 group-hover:text-teal-700 leading-snug">${t.label}</label>
+                    <input type="checkbox" id="term_${i}" name="term" value="${t.val}" ${t.isClosed ? 'disabled' : ''} class="w-5 h-5 text-teal-600 rounded">
+                    <label for="term_${i}" class="ml-3 text-base font-bold ${t.isClosed ? 'line-through text-slate-400' : 'text-slate-700 cursor-pointer'}">
+                        ${t.label} ${t.isClosed ? '<span class="text-red-500 font-bold">[마감]</span>' : ''}
+                    </label>
                 `;
                 termContainer.appendChild(div);
             });
@@ -612,5 +613,6 @@
     </script>
 </body>
 </html>
+
 
 
