@@ -238,10 +238,10 @@
                             <tr>
                                     <td class="p-5 text-center font-bold text-slate-400 border-r">2월</td>
                                     <td class="p-5 border-r">02.23 ~ 02.28</td>
-                                    <td class="p-5 bg-teal-50/50 text-teal-700 font-bold border-r">제1기 (월수금)<br>[마감]<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-teal-100 text-[10px] rounded mt-1">💻 PC 기초</span></td>
-                                    <td class="p-5 bg-teal-50/50 border-r">제1기 (월수금)</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300">-</td></tr>
+                                    <td class="p-5 bg-teal-50/50 text-teal-700 text-center line-through">제1기 (월수금) [마감]<br><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-teal-100 text-[10px] rounded mt-1">💻 PC 기초</span></td>
+                                    <td class="p-5 bg-teal-50/50 text-center line-through">제1기 (월수금)[마감] </td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300">-</td></tr>
                             <tr><td rowspan="5" class="p-5 text-center font-bold text-slate-800 border-t border-slate-200 border-r">3월</td><td class="p-5 border-t border-slate-200 border-r">03.02 ~ 03.07</td><td class="p-5 border-t bg-teal-50/50 text-teal-700 font-bold border-r">제2기 (화수금)<br><span class="text-[10px] text-red-500 block">*공휴일 대체</span><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-teal-100 text-[10px] rounded mt-1">💻 PC 기초</span></td><td class="p-5 border-t bg-teal-50/50 border-r">제2기 (화수금)</td><td class="p-5 border-t border-slate-200 text-center text-slate-300 border-r">-</td><td class="p-5 border-t border-slate-200 text-center text-slate-300">-</td></tr>
-                            <tr><td class="p-5 border-r">03.09 ~ 03.14</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 font-bold text-slate-800 border-r">제1기 (월수금)</td><td class="p-5 font-bold text-slate-800">제1기 (화수금)</td></tr>
+                            <tr><td class="p-5 border-r">03.09 ~ 03.14</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 font-bold text-slate-800 text-center line-through">제1기 (월수금) [마감]</td><td class="p-5 font-bold text-slate-800">제1기 (화수금)</td></tr>
                             <tr><td class="p-5 border-r">03.16 ~ 03.21</td><td class="p-5 bg-teal-50/50 text-teal-700 font-bold border-r">제3기 (월수금)<br><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] rounded mt-1">🤖 AI 활용</span></td><td class="p-5 bg-teal-50/50 border-r">제3기 (월수금)</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300">-</td></tr>
                             <tr><td class="p-5 border-r">03.23 ~ 03.28</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 font-bold text-slate-800 border-r">제2기 (월수금)</td><td class="p-5 font-bold text-slate-800">제2기 (화수금)</td></tr>
                             <tr><td class="p-5 border-r">03.30 ~ 04.04</td><td class="p-5 bg-teal-50/50 text-teal-700 font-bold border-r">제4기 (월수금)<br><span class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] rounded mt-1">🤖 AI 활용</span></td><td class="p-5 bg-teal-50/50 border-r">제4기 (월수금)</td><td class="p-5 text-center text-slate-300 border-r">-</td><td class="p-5 text-center text-slate-300">-</td></tr>
@@ -500,33 +500,33 @@
             // [복구] 각 교육장별 상세 시간, 날짜 정보 반영
             if(centerName.includes('거제3동')) {
                 terms = [
-                    {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28 월수금 09:30~11:30)'},
-                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07 화수금 09:30~11:30)'},
-                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21 월수금 09:30~11:30)'},
-                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04 월수금 09:30~11:30)'},
-                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11 월수금 09:30~11:30)'}
+                    {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28 월수금 09:30~11:30)', isClosed: true},
+                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07 화수금 09:30~11:30)', isClosed: false},
+                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21 월수금 09:30~11:30)', isClosed: false},
+                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04 월수금 09:30~11:30)', isClosed: false},
+                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11 월수금 09:30~11:30)', isClosed: false}
                 ];
             } else if(centerName.includes('유라시아')) {
                 terms = [
-                    {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28 월수금 14:00~16:00)'},
-                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07 화수금 14:00~16:00)'},
-                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21 월수금 14:00~16:00)'},
-                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04 월수금 14:00~16:00)'},
-                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11 월수금 14:00~16:00)'}
+                    {val: '1기', label: '1기 [PC기초] (02.23 ~ 02.28 월수금 14:00~16:00)', isClosed: true},
+                    {val: '2기', label: '2기 [PC기초] (03.02 ~ 03.07 화수금 14:00~16:00)', isClosed: false},
+                    {val: '3기', label: '3기 [AI활용] (03.16 ~ 03.21 월수금 14:00~16:00)', isClosed: false},
+                    {val: '4기', label: '4기 [AI활용] (03.30 ~ 04.04 월수금 14:00~16:00)', isClosed: false},
+                    {val: '5기', label: '5기 [AI활용] (04.06 ~ 04.11 월수금 14:00~16:00)', isClosed: false}
                 ];
             } else if(centerName.includes('북구청')) {
                 terms = [
-                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14 월수금 10:00~12:00)'},
-                    {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28 월수금 10:00~12:00)'},
-                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18 월수금 10:00~12:00)'},
-                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25 월수금 10:00~12:00)'}
+                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14 월수금 10:00~12:00)', isClosed: true},
+                    {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28 월수금 10:00~12:00)', isClosed: false},
+                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18 월수금 10:00~12:00)', isClosed: false},
+                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25 월수금 10:00~12:00)', isClosed: false}
                 ];
             } else if(centerName.includes('부산도서관')) {
                 terms = [
-                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14 화수금 14:00~16:00)'},
-                    {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28 화수금 14:00~16:00)'},
-                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18 화수금 14:00~16:00)'},
-                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25 화수금 14:00~16:00)'}
+                    {val: '1기', label: '1기 [AI활용] (03.09 ~ 03.14 화수금 14:00~16:00)', isClosed: false},
+                    {val: '2기', label: '2기 [AI활용] (03.23 ~ 03.28 화수금 14:00~16:00)', isClosed: false},
+                    {val: '3기', label: '3기 [AI활용] (04.13 ~ 04.18 화수금 14:00~16:00)', isClosed: false},
+                    {val: '4기', label: '4기 [AI활용] (04.20 ~ 04.25 화수금 14:00~16:00)', isClosed: false}
                 ];
             }
 
@@ -612,4 +612,5 @@
     </script>
 </body>
 </html>
+
 
